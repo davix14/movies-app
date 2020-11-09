@@ -1,24 +1,25 @@
 <mat-card>
   <h2>New Movie Entry</h2>
   <form [formGroup]="myForm" (submit)="onSubmit(myForm)">
-    Value : {{ myForm.value | json }}
     <mat-form-field>
+      <mat-label>Title: </mat-label>
       <input
         matInput
-        formControlName="title"
-        placeholder="Title"/>
+        formControlName="title"/>
     </mat-form-field>
+    <mat-label>Rating: </mat-label>
+    <mat-slider
+      thumbLabel
+      min="0"
+      max="5"
+      step="0.5"
+      formControlName="rating">Rating
+    </mat-slider>
     <mat-form-field>
-      <mat-slider
-        min="0"
-        max="5"
-        step="0.5"
-        formControlName="rating">Rating</mat-slider>
-    </mat-form-field>
-    <mat-form-field>
+      <mat-label>Description: </mat-label>
       <textarea
         matInput
-        formControlName="description" placeholder="Description"></textarea>
+        formControlName="description"></textarea>
     </mat-form-field>
     <button mat-button type="submit">Submit</button>
   </form>

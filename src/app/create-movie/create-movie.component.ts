@@ -14,15 +14,15 @@ export class CreateMovieComponent implements OnInit {
   ngOnInit(): void {
     this.myForm = this.fb.group({
       title: '',
-      description: '',
-      rating: ''
+      rating: '',
+      description: ''
     });
 
     this.myForm.valueChanges.subscribe(console.log);
   }
 
   onSubmit(form: FormGroup) {
-    console.log(form);
+    console.log(form.value);
     return null;
   }
 
