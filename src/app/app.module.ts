@@ -13,12 +13,18 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { ListMoviesComponent } from './list-movies/list-movies.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppHeaderComponent,
-    CreateMovieComponent
+    CreateMovieComponent,
+    ListMoviesComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,11 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatSliderModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

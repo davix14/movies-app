@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Movie } from '../movies.model';
+import {MoviesService} from '../movies.service';
 
 @Component({
   selector: 'app-create-movie',
@@ -9,7 +11,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class CreateMovieComponent implements OnInit {
   myForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public movieService: MoviesService) {}
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
@@ -17,13 +19,24 @@ export class CreateMovieComponent implements OnInit {
       rating: '',
       description: ''
     });
-
-    this.myForm.valueChanges.subscribe(console.log);
   }
 
   onSubmit(form: FormGroup) {
-    console.log(form.value);
-    return null;
+    if (form.invalid){ //  If form is invalid do nothing
+      return;
+    }
+    const current = new Date();
+    const newMovie: Movie = { //  Create new movie obj from form
+      id: null,
+      title: form.value.title,
+      rating: form.value.rating,
+      description: form.value.description,
+      dateEntered: current.getTime()
+    };
+    console.log(newMovie);
+    this.movieService.addMovie(newMovie); //  Send new movie to service
+    this.myForm.reset(); //  Reset the form
+    return null; //  Return null to prevent reloading page
   }
 
 }
