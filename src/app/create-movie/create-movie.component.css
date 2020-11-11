@@ -1,4 +1,9 @@
 /*To have the fields stacked vertically instead of in-line*/
-mat-form-field, mat-slider {
+mat-form-field {
   display: flex;
+}
+
+mat-slider {
+  display: flex;
+  width: 50%;
 }

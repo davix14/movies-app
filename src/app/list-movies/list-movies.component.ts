@@ -27,4 +27,8 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
     this.movieSub.unsubscribe();
   }
 
+  onDeleteMovie(id: string){
+    this.moviesService.deleteMovie(id);
+  }
+
 }

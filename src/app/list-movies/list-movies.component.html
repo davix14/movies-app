@@ -9,7 +9,7 @@
     </ul>
     <mat-action-row>
       <button mat-button color="primary">EDIT</button>
-      <button mat-button color="warn">DELETE</button>
+      <button mat-button color="warn" (click)="onDeleteMovie(movie.id)">DELETE</button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>

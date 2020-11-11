@@ -59,12 +59,21 @@ export class MoviesService {
     this.http
       .post<{ message: string; movieId: string }>('http://localhost:3000/api/movies', movie)
       .subscribe((responseData) => {
-        const id = responseData.movieId;
-        movie.id = id;
+        movie.id = responseData.movieId;
         this.allMovies.push(movie); //  Adds new movie to Movies array
         this.moviesUpdated.next([...this.allMovies]); //  Returns copy of Movies array
       });
 
+  }
+
+  deleteMovie(id: string){
+    this.http
+      .delete('http://localhost:3000/api/movies' + id)
+      .subscribe(() => {
+        const updatedMovies = this.allMovies.filter(movie => movie.id !== id);
+        this.allMovies = updatedMovies;
+        this.moviesUpdated.next([...this.allMovies]);
+      });
   }
 
 }
