@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Movie} from './movies.model';
 import {Subject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,15 @@ export class MoviesService {
   ]; //  Holds all movies - added one as placeholder to see changes to list component
   private moviesUpdated = new Subject<Movie[]>(); //  Used to update all required places
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getMovies(): Movie[] {
-    return [...this.allMovies];
+  getMovies() {
+
+    this.http.get<{message: string, movies: Movie[]}>('http://localhost:3000/api/movies')
+      .subscribe((response) => {
+        this.allMovies = response.movies;
+        this.moviesUpdated.next([...this.allMovies]);
+      });
   }
 
   getMovieUpdateListener() {
