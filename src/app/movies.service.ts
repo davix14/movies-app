@@ -9,7 +9,7 @@ export class MoviesService {
   private allMovies: Movie[] = [
     {
       id: null,
-      title: 'new moive',
+      title: 'Old WOWZA',
       rating: 4,
       description: 'green',
       dateEntered: null

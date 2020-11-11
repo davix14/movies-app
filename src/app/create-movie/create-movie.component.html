@@ -1,3 +1,11 @@
+<!-- Design idea:
+     - Wrap it all in a mat-card element to make it look nice
+     - Add Title for info
+     - Form for user input
+     - Give slider steps and thumblabel for ease of use
+     - Added conditional messages for validations
+     - Keep colors like the buttons and fields neutral/colorful until validation triggers
+ -->
 <mat-card>
   <h2>New Movie Entry</h2>
   <form [formGroup]="myForm" (submit)="onSubmit(myForm)">
@@ -6,6 +14,9 @@
       <input
         matInput
         formControlName="title"/>
+      <mat-error>
+        Title is required
+      </mat-error>
     </mat-form-field>
     <mat-label>Rating: </mat-label>
     <mat-slider
@@ -13,15 +24,18 @@
       min="0"
       max="5"
       step="0.5"
+      tickInterval="1"
       formControlName="rating">Rating
     </mat-slider>
+<!--    <mat-error *ngIf="myForm.controls.rating.pristine && submitted == true">ERROROOROOR!</mat-error>
+          TODO Figure out how to warn users when submitting form without touching rating-->
     <mat-form-field>
-      <mat-label>Description:</mat-label>
+      <mat-label>Description <i>(Optional)</i>:</mat-label>
       <textarea
         matInput
         formControlName="description"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-raised-button color="warn" type="submit">Submit</button>
   </form>
 </mat-card>
 
