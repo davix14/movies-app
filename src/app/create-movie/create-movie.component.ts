@@ -19,9 +19,9 @@ export class CreateMovieComponent implements OnInit {
       title: ['', [
         Validators.required,
         Validators.minLength(1)
-      ]], // TODO Add validations
-      rating: '', // TODO Add validations
-      description: ''// TODO Add validations
+      ]],
+      rating: '',
+      description: ''
     });
   }
 
@@ -30,15 +30,8 @@ export class CreateMovieComponent implements OnInit {
       return;
     }
     const current = new Date(); // Create date obj for Timestamp
-    const newMovie: Movie = { //  Create new movie obj from form
-      id: null,
-      title: form.value.title,
-      rating: form.value.rating,
-      description: form.value.description,
-      dateEntered: current.getTime()
-    };
-    // console.log(newMovie); // FR DEBUG: Log to the new obj to console
-    this.movieService.addMovie(newMovie); //  Send new movie to service
+    console.log(form.value); // FR DEBUG: Log to the new obj to console
+    this.movieService.addMovie(form.value.title, form.value.rating, form.value.description, current.getTime()); //  Send new movie to service
     this.myForm.reset(); //  Reset the form
     return null; //  Return null to prevent reloading page
   }
