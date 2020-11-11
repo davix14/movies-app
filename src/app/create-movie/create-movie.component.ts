@@ -10,6 +10,7 @@ import {MoviesService} from '../movies.service';
 })
 export class CreateMovieComponent implements OnInit {
   myForm: FormGroup; // new Form obj to take output of formBuilder
+  formattedDate;
 
   constructor(private fb: FormBuilder, public movieService: MoviesService) {
   } // Injecting Form Builder
@@ -30,7 +31,9 @@ export class CreateMovieComponent implements OnInit {
       return;
     }
     const current = new Date(); // Create date obj for Timestamp
-    console.log(form.value); // FR DEBUG: Log to the new obj to console
+    /*this.formattedDate = new Date(); method to get a cleaner formatted time
+    this.formattedDate.toString(current.getTime());*/
+    // console.log(form.value); // FR DEBUG: Log to the new obj to console
     this.movieService.addMovie(form.value.title, form.value.rating, form.value.description, current.getTime()); //  Send new movie to service
     this.myForm.reset(); //  Reset the form
     return null; //  Return null to prevent reloading page
