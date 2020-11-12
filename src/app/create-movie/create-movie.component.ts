@@ -10,11 +10,16 @@ import {MoviesService} from '../movies.service';
 })
 export class CreateMovieComponent implements OnInit {
   myForm: FormGroup; // new Form obj to take output of formBuilder
-  formattedDate;
-  @ViewChild(FormGroupDirective) form;
+  editing: any = {
+    mode: null,
+    movie: {}
+  };
+  @ViewChild(FormGroupDirective) form; // Instantiating this to be able to
+                                        // clear form of errors after submitting
 
   constructor(private fb: FormBuilder, public movieService: MoviesService) {
-  } // Injecting Form Builder
+  } // Injecting Form Builder (to build forms) and
+    // movieService (to be able to edit, add, delete movies)
 
   ngOnInit(): void {
     this.myForm = this.fb.group({ // Use formBuilder to create a reactive form
@@ -25,6 +30,12 @@ export class CreateMovieComponent implements OnInit {
       rating: '',
       description: ''
     });
+    this.editing.mode = false; // Set flag for edit mode to false
+                          // since 'edit' button has not been clicked
+  }
+
+  onEdit() {
+    this.editing.mode = true;
   }
 
   onSubmit(form: FormGroup) { // Method to handle the form submission IN: Form OUT: void

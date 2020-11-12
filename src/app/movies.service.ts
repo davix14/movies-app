@@ -19,7 +19,6 @@ export class MoviesService {
     }
   ]; //  Holds all movies - added one as placeholder to see changes to list component
   private moviesUpdated = new Subject<Movie[]>(); //  Used to update all required places
-
   constructor(private http: HttpClient) { }
 
   getMovies() {
