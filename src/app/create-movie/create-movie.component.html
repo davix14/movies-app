@@ -37,6 +37,7 @@
         formControlName="description"></textarea>
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-raised-button color="accent" *ngIf="editing.mode == null">Cancel</button>
   </form>
 </mat-card>
 

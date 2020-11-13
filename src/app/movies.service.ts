@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Movie} from './movies.model';
 import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {response} from 'express';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -19,6 +18,7 @@ export class MoviesService {
     }
   ]; //  Holds all movies - added one as placeholder to see changes to list component
   private moviesUpdated = new Subject<Movie[]>(); //  Used to update all required places
+  private movieEdit = new Subject<Movie[]>(); //  Used to update all required places
   constructor(private http: HttpClient) { }
 
   getMovies() {
@@ -47,6 +47,14 @@ export class MoviesService {
     return this.moviesUpdated.asObservable();
   }
 
+  getEditMovieUpdateListener() {
+    return this.movieEdit.asObservable();
+  }
+
+  editMovie(idIn: string) {
+    return this.movieEdit.next(this.allMovies.filter(movie => movie.id === idIn));
+  }
+
   addMovie(titleIn: string, ratingIn: number, descriptionIn: string, dateEnteredIn: number) {
     const movie: Movie = {
       id: null,
@@ -69,8 +77,7 @@ export class MoviesService {
     this.http
       .delete('http://localhost:3000/api/movies' + id)
       .subscribe(() => {
-        const updatedMovies = this.allMovies.filter(movie => movie.id !== id);
-        this.allMovies = updatedMovies;
+        this.allMovies = this.allMovies.filter(movie => movie.id !== id);
         this.moviesUpdated.next([...this.allMovies]);
       });
   }

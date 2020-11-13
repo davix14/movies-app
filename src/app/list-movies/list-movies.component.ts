@@ -37,4 +37,7 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
     return format.toDateString();
   }
 
+  onEditMovie(idIn: string) {
+    this.moviesService.editMovie(idIn);
+  }
 }
