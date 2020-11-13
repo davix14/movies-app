@@ -11,9 +11,10 @@ import {MoviesService} from '../movies.service';
 export class ListMoviesComponent implements OnInit, OnDestroy {
   movies: Movie[] = [];
 
-  private  movieSub: Subscription;
+  private movieSub: Subscription;
 
-  constructor(public moviesService: MoviesService) { }
+  constructor(public moviesService: MoviesService) {
+  }
 
   ngOnInit(): void {
     this.moviesService.getMovies();
@@ -27,11 +28,11 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
     this.movieSub.unsubscribe();
   }
 
-  onDeleteMovie(id: string){
+  onDeleteMovie(id: string) {
     this.moviesService.deleteMovie(id);
   }
 
-  formatDate(date: number){
+  formatDate(date: number) {
     const format = new Date(date);
     return format.toDateString();
   }
