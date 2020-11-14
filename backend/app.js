@@ -60,15 +60,15 @@ app.post("/api/movies", (req, res) => {
   });
 });
 
-app.put("/api/movies:id", (req, res) => {
+app.put("/api/movies", (req, res) => {
   const movie = new Movie({
-    id: req.body.id,
+    _id: req.body.id,
     title: req.body.title,
     rating: req.body.rating,
     description: req.body.description,
     dateEntered: req.body.dateEntered
   });
-  Movie.updateOne({ _id: req.params.id }, movie).then(result => {
+  Movie.updateOne({ _id: req.body.id }, movie).then(result => {
     console.log(result);
     res.status(200).json({ message: "Update successful!" });
   });

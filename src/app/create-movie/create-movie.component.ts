@@ -50,13 +50,10 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     this.myForm.reset(); //  Reset the form
     this.form.resetForm(); // Reset form errors
     this.editing.mode = true; //  Set editing mode to true
-    this.fillFormForEditing(); //  Fill form with editing values
-  }
-
-  fillFormForEditing() {
-    this.form.title.value = this.editing.movie.title;
-    // this.form.rating.value = this.editing.movie.rating;
-    this.form.description.value = this.editing.movie.description;
+    this.myForm.setValue({ //  Fill form with editing values
+      title: this.editing.movie.title,
+      rating: this.editing.movie.rating,
+      description: this.editing.movie.description});
   }
 
   onSubmit(form: FormGroup) { // Method to handle the form submission IN: Form OUT: void
@@ -64,6 +61,9 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       return;
     }
     const current = new Date(); // Create date obj for Timestamp
+
+    // tslint:disable-next-line:triple-equals
+    if (this.editing.mode != true){
     /*this.formattedDate = new Date(); method to get a cleaner formatted time
     this.formattedDate.toString(current.getTime());*/
 
@@ -82,6 +82,19 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       this.myForm.controls[key].setErrors(null);*/
 
     return null; //  Return null to prevent reloading page
+    } else {
+      this.movieService.sendEditMovie( //  Send new movie to service
+        this.editing.movie.id,
+        form.value.title,
+        form.value.rating,
+        form.value.description,
+        current.getTime());
+
+      this.editing.mode = false; //  Change edit mode to false
+      this.myForm.reset(); //  Reset the form
+      this.form.resetForm(); // Reset form errors
+      return null;
+    }
   }
 
 }

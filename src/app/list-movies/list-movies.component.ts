@@ -38,6 +38,6 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
   }
 
   onEditMovie(idIn: string) {
-    this.moviesService.editMovie(idIn);
+    this.moviesService.startEditMovie(idIn);
   }
 }

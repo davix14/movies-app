@@ -36,8 +36,8 @@
         matInput
         formControlName="description"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
-    <button mat-raised-button color="accent" *ngIf="editing.mode == null">Cancel</button>
+    <button mat-raised-button class="submitBttn" color="primary" type="submit">Submit</button>
+    <button mat-raised-button class="cancelBttn" color="accent" *ngIf="editing.mode != false">Cancel</button>
   </form>
 </mat-card>
 

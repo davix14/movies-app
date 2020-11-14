@@ -7,3 +7,7 @@ mat-slider {
   display: flex;
   margin: 0 40% 0 0;
 }
+
+.cancelBttn {
+  margin: 0 1rem;
+}
