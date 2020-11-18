@@ -19,13 +19,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {HttpClientModule} from '@angular/common/http';
+import { AppHomeComponent } from './app-home/app-home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppHeaderComponent,
     CreateMovieComponent,
-    ListMoviesComponent
+    ListMoviesComponent,
+    AppHomeComponent
   ],
   imports: [
     BrowserModule,
