@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Movie} from '../movies.model';
 import {MoviesService} from '../movies.service';
@@ -17,6 +17,8 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
   }; //  Creating an obj for edit mode control
   @ViewChild(FormGroupDirective) form; // Instantiating this to be able to
   // clear form of errors after submitting
+  @ViewChild('title') titleField: ElementRef; //  Will store title element reference
+
   private editSub: Subscription;
 
   constructor(private fb: FormBuilder, public movieService: MoviesService) {
@@ -54,6 +56,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       title: this.editing.movie.title,
       rating: this.editing.movie.rating,
       description: this.editing.movie.description});
+    this.titleField.nativeElement.focus(); //  Focus on title field
   }
 
   onSubmit(form: FormGroup) { // Method to handle the form submission IN: Form OUT: void
@@ -82,7 +85,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       this.myForm.controls[key].setErrors(null);*/
 
     return null; //  Return null to prevent reloading page
-    } else {
+    } else { //  In editing Mode
       this.movieService.sendEditMovie( //  Send new movie to service
         this.editing.movie.id,
         form.value.title,
@@ -95,6 +98,12 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       this.form.resetForm(); // Reset form errors
       return null;
     }
+  }
+
+  onCancel() {
+    this.myForm.reset(); //  Reset the form
+    this.form.resetForm(); // Reset form errors
+    this.editing.mode = false; //  Set editing mode to false
   }
 
 }

@@ -14,12 +14,13 @@
       <mat-label>Title:</mat-label>
       <input
         matInput
+        #title
         formControlName="title"/>
       <mat-error>
         Title is required
       </mat-error>
     </mat-form-field>
-    <mat-label>Rating: </mat-label>
+    <mat-label>Rating:</mat-label>
     <mat-slider
       thumbLabel
       min="0"
@@ -28,16 +29,21 @@
       tickInterval="1"
       formControlName="rating">Rating
     </mat-slider>
-<!--    <mat-error *ngIf="myForm.controls.rating.pristine && submitted == true">ERROROOROOR!</mat-error>
-          TODO Figure out how to warn users when submitting form without touching rating-->
+    <!--    <mat-error *ngIf="myForm.controls.rating.pristine && submitted == true">ERROROOROOR!</mat-error>
+              TODO Figure out how to warn users when submitting form without touching rating-->
     <mat-form-field>
       <mat-label>Description <i>(Optional)</i>:</mat-label>
       <textarea
         matInput
         formControlName="description"></textarea>
     </mat-form-field>
-    <button mat-raised-button class="submitBttn" color="primary" type="submit">Submit</button>
-    <button mat-raised-button class="cancelBttn" color="accent" *ngIf="editing.mode != false">Cancel</button>
+    <button mat-raised-button class="submitBttn"
+            color="primary" type="submit">Submit</button>
+    <button mat-raised-button class="cancelBttn"
+            color="accent" type="button"
+            *ngIf="editing.mode != false"
+            (click)="onCancel()">Cancel
+    </button>
   </form>
 </mat-card>
 

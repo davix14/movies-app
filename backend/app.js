@@ -52,7 +52,7 @@ app.post("/api/movies", (req, res) => {
     dateEntered: req.body.dateEntered
   });
   movie.save().then(createdPost => {
-    console.log(createdPost);
+    // console.log(createdPost);
     res.status(201).json({
       message: 'Movie added successfully',
       movieId: createdPost._id
@@ -69,7 +69,8 @@ app.put("/api/movies", (req, res) => {
     dateEntered: req.body.dateEntered
   });
   Movie.updateOne({ _id: req.body.id }, movie).then(result => {
-    console.log(result);
+    // console.log(result);
+    console.log('Update of Record Successful');
     res.status(200).json({ message: "Update successful!" });
   });
 });
