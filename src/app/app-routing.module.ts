@@ -7,7 +7,8 @@ import {AppHomeComponent} from './app-home/app-home.component';
 
 const routes: Routes = [
   { path: '', component: AppHomeComponent},
-  { path: 'list', component: ListMoviesComponent }
+  { path: 'list', component: ListMoviesComponent },
+  { path: 'create', component: CreateMovieComponent }
 ];
 
 @NgModule({

@@ -38,9 +38,11 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     // since 'edit' button has not been clicked
     this.editSub = this.movieService.getEditMovieUpdateListener() //  Created update listener for editing purposes
       .subscribe((movie: Movie[]) => { // Subscribe to editing obj.movie to hold movie to be edited
-        this.editing.movie = movie[0]; //  when editing movie is receieved editing is filled with it
-        console.log(this.editing.movie);
-        this.onEdit(); //  Call function to kick off editing flow
+        if (movie != null){
+          this.editing.movie = movie[0]; //  when editing movie is receieved editing is filled with it
+          // console.log(this.editing.movie);
+          this.onEdit(); //  Call function to kick off editing flow
+          }
       });
   }
 
@@ -50,13 +52,13 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
 
   onEdit() {
     this.myForm.reset(); //  Reset the form
-    this.form.resetForm(); // Reset form errors
+    // CAUSING Errors -> this.form.resetForm(); // Reset form errors
     this.editing.mode = true; //  Set editing mode to true
     this.myForm.setValue({ //  Fill form with editing values
       title: this.editing.movie.title,
       rating: this.editing.movie.rating,
       description: this.editing.movie.description});
-    this.titleField.nativeElement.focus(); //  Focus on title field
+    // CAUSING Errors -> this.titleField.nativeElement.focus(); //  Focus on title field
   }
 
   onSubmit(form: FormGroup) { // Method to handle the form submission IN: Form OUT: void
@@ -65,8 +67,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     }
     const current = new Date(); // Create date obj for Timestamp
 
-    // tslint:disable-next-line:triple-equals
-    if (this.editing.mode != true){
+    if (this.editing.mode !== true){
     /*this.formattedDate = new Date(); method to get a cleaner formatted time
     this.formattedDate.toString(current.getTime());*/
 

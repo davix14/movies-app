@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Movie} from './movies.model';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ export class MoviesService {
     }
   ]; //  Holds all movies - added one as placeholder to see changes to list component
   private moviesUpdated = new Subject<Movie[]>(); //  Used to update all required places
-  private movieEdit = new Subject<Movie[]>(); //  Used to update all required places
+  private movieEdit = new BehaviorSubject<Movie[]>(null); //  Used to update all required places
   constructor(private http: HttpClient) {
   }
 

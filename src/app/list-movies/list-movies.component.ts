@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Movie} from '../movies.model';
 import {Subscription} from 'rxjs';
 import {MoviesService} from '../movies.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-movies',
@@ -13,7 +14,7 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
 
   private movieSub: Subscription;
 
-  constructor(public moviesService: MoviesService) {
+  constructor(public moviesService: MoviesService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -39,5 +40,8 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
 
   onEditMovie(idIn: string) {
     this.moviesService.startEditMovie(idIn);
+    if (this.router.url === '/list'){
+    this.router.navigate(['create']);
+    }
   }
 }
