@@ -20,6 +20,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {HttpClientModule} from '@angular/common/http';
 import { AppHomeComponent } from './app-home/app-home.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AppHomeComponent } from './app-home/app-home.component';
     AppHeaderComponent,
     CreateMovieComponent,
     ListMoviesComponent,
-    AppHomeComponent
+    AppHomeComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
