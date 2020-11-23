@@ -1,8 +1,4 @@
 import {Component, ElementRef, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SearchMoviesService} from './search-movies.service';
-import {Observable, fromEvent} from 'rxjs';
-import {debounceTime, filter, map} from 'rxjs/operators';
 import {SearchResult} from './searchResult.model';
 
 @Component({

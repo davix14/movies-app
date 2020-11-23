@@ -1,0 +1,15 @@
+<mat-card>
+  <form [formGroup]="searchForm">
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="search"
+        type="text"
+        placeholder="Start typing to search"
+        #searchInput>
+    </mat-form-field>
+  </form>
+  <div>
+<!--    {{ this.results | json }}-->
+  </div>
+</mat-card>
