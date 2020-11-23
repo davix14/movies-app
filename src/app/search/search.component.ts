@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SearchMoviesService} from './search-movies.service';
+import {Observable, fromEvent} from 'rxjs';
+import {debounceTime, filter, map} from 'rxjs/operators';
+import {SearchResult} from './searchResult.model';
 
 @Component({
   selector: 'app-search',
@@ -8,24 +11,9 @@ import {SearchMoviesService} from './search-movies.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  searchForm: FormGroup;
-  results;
+  @Output()results: SearchResult[];
 
-  constructor(private fb: FormBuilder, private searchResults: SearchMoviesService) {
-  }
-
-  ngOnInit(): void {
-    this.searchForm = this.fb.group({
-      search: ['', [Validators.required]]
-    });
-    this.searchResults.getSearchResults()
-      .subscribe((results) => {
-        this.results = results.Search;
-      });
-  }
-
-  search(input: string) {
-    this.searchResults.searchForMany(input);
+  ngOnInit() {
   }
 
 }

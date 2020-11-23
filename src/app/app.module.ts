@@ -21,6 +21,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {HttpClientModule} from '@angular/common/http';
 import { AppHomeComponent } from './app-home/app-home.component';
 import { SearchComponent } from './search/search.component';
+import { SearchResultsComponent } from './search/search-results/search-results.component';
+import { SearchEntryComponent } from './search/search-entry/search-entry.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { SearchComponent } from './search/search.component';
     CreateMovieComponent,
     ListMoviesComponent,
     AppHomeComponent,
-    SearchComponent
+    SearchComponent,
+    SearchResultsComponent,
+    SearchEntryComponent
   ],
   imports: [
     BrowserModule,

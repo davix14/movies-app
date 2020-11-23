@@ -8,6 +8,8 @@ import {Movie} from '../movies.model';
 })
 export class SearchMoviesService {
   private moviesUpdated = new Subject<any>();
+  private API_URL = 'http://www.omdbapi.com/?';
+  private API_KEY = 'apikey=22df56fe';
 
   constructor(private http: HttpClient) {
   }
@@ -17,10 +19,11 @@ export class SearchMoviesService {
   }
 
   searchForMany(param: string) {
-    this.http.get('http://www.omdbapi.com/?apikey=22df56fe&s=' + param)
+    this.http
+      .get(this.API_URL + this.API_KEY + '&s=' + param)
       .subscribe(value => {
         this.moviesUpdated.next(value);
-        });
+      });
   }
 
 }
