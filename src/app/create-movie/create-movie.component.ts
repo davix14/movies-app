@@ -4,6 +4,7 @@ import {Movie} from '../movies.model';
 import {MoviesService} from '../movies.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-movie',
@@ -22,7 +23,10 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
 
   private editSub: Subscription;
 
-  constructor(private fb: FormBuilder, public movieService: MoviesService, private rtr: Router) {
+  constructor(private fb: FormBuilder,
+              public movieService: MoviesService,
+              private rtr: Router, private dialogRef: MatDialogRef<CreateMovieComponent>
+              ) {
   } // Injecting Form Builder (to build forms) and
     // movieService (to be able to edit, add, delete movies)
 
@@ -107,6 +111,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     this.myForm.reset(); //  Reset the form
     this.form.resetForm(); // Reset form errors
     this.editing.mode = false; //  Set editing mode to false
+    this.dialogRef.close();
   }
 
 }
