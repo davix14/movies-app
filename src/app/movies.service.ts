@@ -56,6 +56,10 @@ export class MoviesService {
     return this.movieEdit.next(this.allMovies.filter(movie => movie.id === idIn));
   }
 
+  cancelEditMovie() {
+    this.movieEdit.next(null);
+  }
+
   sendEditMovie(idIn: string, titleIn: string, ratingIn: number, descriptionIn: string, dateEnteredIn: number) {
     const movie: Movie = { //  Create new Movie obj
       id: idIn,

@@ -25,8 +25,8 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
               public movieService: MoviesService,
-              private rtr: Router, private dialogRef: MatDialogRef<CreateMovieComponent>
-              ) {
+              public rtr: Router, private dialogRef: MatDialogRef<CreateMovieComponent>
+  ) {
   } // Injecting Form Builder (to build forms) and
     // movieService (to be able to edit, add, delete movies)
 
@@ -43,11 +43,11 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     // since 'edit' button has not been clicked
     this.editSub = this.movieService.getEditMovieUpdateListener() //  Created update listener for editing purposes
       .subscribe((movie: Movie[]) => { // Subscribe to editing obj.movie to hold movie to be edited
-        if (movie != null){
+        if (movie != null) {
           this.editing.movie = movie[0]; //  when editing movie is receieved editing is filled with it
           // console.log(this.editing.movie);
           this.onEdit(); //  Call function to kick off editing flow
-          }
+        }
       });
   }
 
@@ -62,7 +62,8 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     this.myForm.setValue({ //  Fill form with editing values
       title: this.editing.movie.title,
       rating: this.editing.movie.rating,
-      description: this.editing.movie.description});
+      description: this.editing.movie.description
+    });
     // CAUSING Errors -> this.titleField.nativeElement.focus(); //  Focus on title field
   }
 
@@ -72,25 +73,25 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     }
     const current = new Date(); // Create date obj for Timestamp
 
-    if (this.editing.mode !== true){
-    /*this.formattedDate = new Date(); method to get a cleaner formatted time
-    this.formattedDate.toString(current.getTime());*/
+    if (this.editing.mode !== true) {
+      /*this.formattedDate = new Date(); method to get a cleaner formatted time
+      this.formattedDate.toString(current.getTime());*/
 
-    // console.log(form.value); // FR DEBUG: Log to the new obj to console
+      // console.log(form.value); // FR DEBUG: Log to the new obj to console
 
-    this.movieService.addMovie( //  Send new movie to service
-      form.value.title,
-      form.value.rating,
-      form.value.description,
-      current.getTime());
+      this.movieService.addMovie( //  Send new movie to service
+        form.value.title,
+        form.value.rating,
+        form.value.description,
+        current.getTime());
 
-    this.myForm.reset(); //  Reset the form
-    this.form.resetForm(); // Reset form errors
+      this.myForm.reset(); //  Reset the form
+      this.form.resetForm(); // Reset form errors
 
-    /*Object.keys(this.myForm.controls).forEach(key => { ONE WAY OF RESETTING FORM ERRORS
-      this.myForm.controls[key].setErrors(null);*/
-
-    return null; //  Return null to prevent reloading page
+      /*Object.keys(this.myForm.controls).forEach(key => { ONE WAY OF RESETTING FORM ERRORS
+        this.myForm.controls[key].setErrors(null);*/
+      this.dialogRef.close();
+      return null; //  Return null to prevent reloading page
     } else { //  In editing Mode
       this.movieService.sendEditMovie( //  Send new movie to service
         this.editing.movie.id,
@@ -102,15 +103,21 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       this.editing.mode = false; //  Change edit mode to false
       this.myForm.reset(); //  Reset the form
       this.form.resetForm(); // Reset form errors
-      this.rtr.navigate(['list']); //  Navigate back to List page
+      if (this.rtr.url === '/create') {
+        this.rtr.navigate(['list']); //  Navigate back to List page
+      }
+      this.dialogRef.close();
       return null;
     }
   }
 
   onCancel() {
-    this.myForm.reset(); //  Reset the form
-    this.form.resetForm(); // Reset form errors
+    while (this.myForm.value.title != null) {
+      this.myForm.reset(); //  Reset the form
+      this.form.resetForm(); // Reset form errors
+    }
     this.editing.mode = false; //  Set editing mode to false
+    this.movieService.cancelEditMovie();
     this.dialogRef.close();
   }
 
