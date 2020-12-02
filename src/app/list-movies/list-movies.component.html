@@ -3,11 +3,11 @@
     <mat-expansion-panel-header>
       {{ movie.title }}
     </mat-expansion-panel-header>
-    <ul>
-      <li>Rating:  {{ movie.rating }}</li>
-      <li>Description:  {{ movie.description }}</li>
-      <li>Last Updated: {{ formatDate(movie.dateEntered) }} </li>
-    </ul>
+    <mat-list>
+      <mat-list-item>Rating:  {{ movie.rating }}</mat-list-item>
+      <mat-list-item>Description:  {{ movie.description }}</mat-list-item>
+      <mat-list-item>Last Updated: {{ formatDate(movie.dateEntered) }} </mat-list-item>
+    </mat-list>
     <mat-action-row>
       <button mat-button color="primary" (click)="onEditMovie(movie.id)">EDIT</button>
       <button mat-button color="warn" (click)="onDeleteMovie(movie.id)">DELETE</button>

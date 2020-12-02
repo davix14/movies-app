@@ -7,9 +7,13 @@ import {SearchResult} from './searchResult.model';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  @Output()results: SearchResult[];
+  results: SearchResult[];
 
   ngOnInit() {
   }
 
+  getResults(results: SearchResult[]) {
+    this.results = results;
+    console.log(this.results);
+  }
 }

@@ -7,7 +7,7 @@ import {SearchResult} from '../searchResult.model';
   styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent implements OnInit {
-  @Input()searchResults: SearchResult[];
+  @Input()sr: SearchResult;
   constructor() { }
 
   ngOnInit(): void {

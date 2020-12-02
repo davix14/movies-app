@@ -1,4 +1,9 @@
-<p>Search Component</p>
-<app-search-entry (searchInput)="results = $event"></app-search-entry>
-<br>
-<app-search-results [searchResults]="results"></app-search-results>
+<div class="search-container">
+  <app-search-entry (searchInput)="getResults($event)"></app-search-entry>
+  <br>
+  <mat-grid-list cols="1" rowHeight="4:3">
+    <mat-grid-tile *ngFor="let result of results">
+      <app-search-results [sr]="result"></app-search-results>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

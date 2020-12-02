@@ -1,0 +1,13 @@
+mat-grid-list {
+  /*margin: auto;*/
+
+  /*height: fit-content;
+  width: fit-content;*/
+  /*height: 30rem;*/
+  /*width: 45rem;*/
+}
+
+mat-grid-tile {
+  width: 40%;
+  /*margin: 0 5rem;*/
+}

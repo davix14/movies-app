@@ -1,4 +1,18 @@
-<p>search-results works!</p>
+<!--<p>search-results works!</p>-->
+  <mat-card>
+    <mat-card-title>{{ sr.Title }}</mat-card-title>
+    <mat-card-subtitle>{{ sr.Year }}</mat-card-subtitle>
+    <mat-card-header>{{ sr.Type.toUpperCase() }}</mat-card-header>
+    <img [src]="sr.Poster">
+    <mat-card-content>
+      <mat-label>Thoughts:</mat-label>
+      <p>
+        Well it
+      </p>
+    </mat-card-content>
+  </mat-card>
+<!--
 <div>
   {{ this.searchResults | json }}
 </div>
+-->

@@ -10,12 +10,11 @@ import {debounceTime} from 'rxjs/operators';
   templateUrl: './search-entry.component.html',
   styleUrls: ['./search-entry.component.css']
 })
-export class SearchEntryComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SearchEntryComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   results: SearchResult[];
   isLoading: boolean;
   @Output() searchInput = new EventEmitter<SearchResult[]>();
-  // @ViewChild('searchInput') searchEntry: ElementRef;
   searchSub: Subscription;
 
   constructor(
@@ -41,29 +40,15 @@ export class SearchEntryComponent implements OnInit, AfterViewInit, OnDestroy {
           this.searchResults.searchForMany(value);
         }
       });
-    /*const source = fromEvent<any>(this.el.nativeElement, 'keyup')
+    /*const source = fromEvent<any>(this.el.nativeElement, 'keyup')  EXAMPLE of FROM EVENT
       .pipe(map((e: any) => e.target.value))
       .pipe(filter((text: string) => text.length > 1))
       .pipe(debounceTime(250))
       .subscribe(() => this.isLoading = true);*/
   }
 
-  ngAfterViewInit() {
-  }
-
-  searching() { // unused created custom observable from the keyup event on input element
-    /*this.searchSub = fromEvent(this.searchEntry.nativeElement, 'keyup')
-      .pipe(debounceTime(300))
-      .subscribe((value: string) => {
-        if (this.searchForm.valid) {
-          console.log(value);
-          // this.searchResults.searchForMany(value);
-        }
-      });*/
-  }
-
   ngOnDestroy() {
-    // this.searchSub.unsubscribe();
+    this.searchSub.unsubscribe();
   }
 
   search(input: string) {
