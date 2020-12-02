@@ -33,7 +33,7 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
     this.moviesService.deleteMovie(id);
   }
 
-  formatDate(date: number) {
+  formatDate(date: number): string {
     const format = new Date(date);
     return format.toDateString();
   }

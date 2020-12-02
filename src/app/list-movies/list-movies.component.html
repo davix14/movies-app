@@ -1,4 +1,4 @@
-<mat-accordion *ngIf="movies.length > 0">
+<mat-accordion *ngIf="movies.length > 0" [multi]="false">
   <mat-expansion-panel *ngFor="let movie of movies">
     <mat-expansion-panel-header>
       {{ movie.title }}
