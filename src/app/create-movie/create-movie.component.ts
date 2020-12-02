@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/f
 import {Movie} from '../movies.model';
 import {MoviesService} from '../movies.service';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-movie',
@@ -21,7 +22,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
 
   private editSub: Subscription;
 
-  constructor(private fb: FormBuilder, public movieService: MoviesService) {
+  constructor(private fb: FormBuilder, public movieService: MoviesService, private rtr: Router) {
   } // Injecting Form Builder (to build forms) and
     // movieService (to be able to edit, add, delete movies)
 
@@ -97,6 +98,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       this.editing.mode = false; //  Change edit mode to false
       this.myForm.reset(); //  Reset the form
       this.form.resetForm(); // Reset form errors
+      this.rtr.navigate(['list']);
       return null;
     }
   }
