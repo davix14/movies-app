@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SearchResult} from './searchResult.model';
 
 @Component({

@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SearchMoviesService} from '../search-movies.service';
 import {SearchResult} from '../searchResult.model';
-import {fromEvent, of, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
 @Component({
