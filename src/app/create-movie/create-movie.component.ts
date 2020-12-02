@@ -98,7 +98,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       this.editing.mode = false; //  Change edit mode to false
       this.myForm.reset(); //  Reset the form
       this.form.resetForm(); // Reset form errors
-      this.rtr.navigate(['list']);
+      this.rtr.navigate(['list']); //  Navigate back to List page
       return null;
     }
   }
