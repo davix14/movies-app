@@ -4,12 +4,12 @@ import {CreateMovieComponent} from './create-movie/create-movie.component';
 import {ListMoviesComponent} from './list-movies/list-movies.component';
 import {AppHomeComponent} from './app-home/app-home.component';
 import {SearchComponent} from './search/search.component';
+import {LoginComponent} from './login/login.component';
 
 
 const routes: Routes = [
-  { path: '', component: AppHomeComponent},
-  { path: 'list', component: ListMoviesComponent },
-  { path: 'create', component: CreateMovieComponent },
+  { path: 'home', component: AppHomeComponent},
+  { path: '', component: LoginComponent },
   { path: 'search', component: SearchComponent }
 ];
 

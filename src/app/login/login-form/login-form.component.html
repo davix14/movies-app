@@ -1,0 +1,12 @@
+<mat-card>
+<form [formGroup]="loginForm" (submit)="onLogin(loginForm)">
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput
+           type="text"
+           formControlName="username">
+    <mat-error *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid">Username must be at least 3 characters long</mat-error>
+  </mat-form-field>
+  <button mat-stroked-button color="primary" type="submit">Login</button>
+</form>
+</mat-card>

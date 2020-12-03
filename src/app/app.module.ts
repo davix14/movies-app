@@ -25,6 +25,8 @@ import {SearchResultsComponent} from './search/search-results/search-results.com
 import {SearchEntryComponent} from './search/search-entry/search-entry.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import { LoginComponent } from './login/login.component';
+import { LoginFormComponent } from './login/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
     AppHomeComponent,
     SearchComponent,
     SearchResultsComponent,
-    SearchEntryComponent
+    SearchEntryComponent,
+    LoginComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
