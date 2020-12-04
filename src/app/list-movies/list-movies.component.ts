@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ListMoviesComponent implements OnInit, OnDestroy {
   movies: Movie[] = [];
-  @Output()editClicked = new EventEmitter();
+  @Output() editClicked = new EventEmitter();
   private movieSub: Subscription;
 
   constructor(public moviesService: MoviesService, private router: Router) {
@@ -41,8 +41,8 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
   onEditMovie(idIn: string) {
     this.moviesService.startEditMovie(idIn);
     this.editClicked.emit();
-    if (this.router.url === '/list'){
-    this.router.navigate(['create']);
+    if (this.router.url === '/list') {
+      this.router.navigate(['create']);
     }
   }
 }

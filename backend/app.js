@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const Movie = require("./models/movie");
+const moviesRoutes = require('./routes/movies');
+
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/api/movies", (req, res) => {
+/*app.get("/api/movies", (req, res) => {
   Movie.find().then(documents => {
     res.status(200).json({
       message: 'Successfully got movies from MongoDB',
@@ -80,6 +81,8 @@ app.delete("/api/movies:id", (req, res) => {
     // console.log(result);
     res.status(200).json({message: 'Post Deleted!', result: result})
   });
-});
+});*/
+
+app.use('/api/movies', moviesRoutes);
 
 module.exports = app;
