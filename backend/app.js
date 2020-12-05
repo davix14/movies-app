@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const moviesRoutes = require('./routes/movies');
+const usersRoutes = require('./routes/users');
 
 
 const app = express();
@@ -36,53 +37,7 @@ app.use((req, res, next) => {
   next();
 });
 
-/*app.get("/api/movies", (req, res) => {
-  Movie.find().then(documents => {
-    res.status(200).json({
-      message: 'Successfully got movies from MongoDB',
-      movies: documents
-    });
-  });
-});
-
-app.post("/api/movies", (req, res) => {
-  const movie = new Movie({
-    title: req.body.title,
-    rating: req.body.rating,
-    description: req.body.description,
-    dateEntered: req.body.dateEntered
-  });
-  movie.save().then(createdPost => {
-    // console.log(createdPost);
-    res.status(201).json({
-      message: 'Movie added successfully',
-      movieId: createdPost._id
-    });
-  });
-});
-
-app.put("/api/movies", (req, res) => {
-  const movie = new Movie({
-    _id: req.body.id,
-    title: req.body.title,
-    rating: req.body.rating,
-    description: req.body.description,
-    dateEntered: req.body.dateEntered
-  });
-  Movie.updateOne({ _id: req.body.id }, movie).then(result => {
-    // console.log(result);
-    console.log('Update of Record Successful');
-    res.status(200).json({ message: "Update successful!" });
-  });
-});
-
-app.delete("/api/movies:id", (req, res) => {
-  Movie.deleteOne({_id: req.params.id}).then(result => {
-    // console.log(result);
-    res.status(200).json({message: 'Post Deleted!', result: result})
-  });
-});*/
-
 app.use('/api/movies', moviesRoutes);
+app.use('/api/users', usersRoutes);
 
 module.exports = app;

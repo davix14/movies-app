@@ -27,6 +27,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { LoginComponent } from './login/login.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
+import { NewUserComponent } from './new-user/new-user.component';
+import { RegisterFormComponent } from './new-user/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { LoginFormComponent } from './login/login-form/login-form.component';
     SearchResultsComponent,
     SearchEntryComponent,
     LoginComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    NewUserComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,

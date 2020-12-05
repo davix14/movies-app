@@ -1,0 +1,13 @@
+<mat-card>
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm)">
+    <mat-form-field>
+      <mat-label>Name:</mat-label>
+      <input matInput formControlName="name" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Username:</mat-label>
+      <input matInput formControlName="username" type="text">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Register</button>
+  </form>
+</mat-card>
