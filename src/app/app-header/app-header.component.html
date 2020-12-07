@@ -1,5 +1,25 @@
 <div class="header-container">
   <mat-toolbar color="primary">
-    <h1>Movies DB</h1>
+    <span>
+    <a routerLink="/">MoviesDB</a>
+  </span>
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>search</mat-icon>
+        <span>Search</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>movie_creation</mat-icon>
+        <span>Movies</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings_applications</mat-icon>
+        <span>User Settings</span>
+      </button>
+    </mat-menu>
   </mat-toolbar>
 </div>
