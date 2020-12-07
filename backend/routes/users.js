@@ -3,12 +3,12 @@ const User = require("../models/user");
 
 const router = express.Router();
 
-router.get('', (req, res) => {
+router.get('/checkOne', (req, res) => {
 
 });
 
 router.post('/newUser', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const newUser = new User({
     name: req.body.name,
     username: req.body.username,

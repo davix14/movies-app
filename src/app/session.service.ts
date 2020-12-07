@@ -31,7 +31,7 @@ export class SessionService {
       });*/
   }
 
-  registerUser(name: string, username: string, date: number) {
+  registerUser(name: string, username: string, date: number): boolean {
     const userData: User = {
       id: null,
       name: name,
@@ -39,11 +39,22 @@ export class SessionService {
       registrationDate: date,
       lastUpdate: date
     };
+    try{
     this.http
       .post<{ message: string, user: User }>('http://localhost:3000/api/users/newUser', userData)
       .subscribe((responseData) => {
+        if (responseData.user != null){
         this.user = responseData.user;
+        this.userUpdated.next([this.user]);
+        return true;
+        } else {
+          return false;
+        }
       });
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
   }
 
 }

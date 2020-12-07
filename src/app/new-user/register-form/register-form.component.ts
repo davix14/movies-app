@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {SessionService} from '../../session.service';
+import {User} from '../../user.model';
 
 @Component({
   selector: 'app-register-form',
@@ -19,6 +20,15 @@ export class RegisterFormComponent implements OnInit {
       username: ['', {validators: [Validators.minLength(3), Validators.required]}],
       name: ['', {validators: [Validators.required, Validators.minLength(3)]}]
     });
+    this.sessionService.getUserUpdated()
+      .subscribe((user: User) => {
+        if (user != null) {
+          this.registerForm.reset();
+          this.router.navigate(['']);
+        } else {
+
+        }
+      });
   }
 
   registerUser(userForm: FormGroup) {
@@ -27,11 +37,16 @@ export class RegisterFormComponent implements OnInit {
     } else {
       // TODO Add call to User Service to add new user to DB
       const current = new Date(); // Create date obj for Timestamp
-      this.sessionService.registerUser(
+      const success: boolean = this.sessionService.registerUser(
         userForm.value.name,
         userForm.value.username,
         current.getTime()
       );
+      /*if (success){
+      this.registerForm.reset();
+      } else {
+        console.log('Registration FAILED');
+      }*/
     }
   }
 
