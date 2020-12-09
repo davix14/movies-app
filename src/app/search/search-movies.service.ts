@@ -8,7 +8,7 @@ import {Movie} from '../movies.model';
 })
 export class SearchMoviesService {
   private moviesUpdated = new Subject<any>();
-  private API_URL = 'http://www.omdbapi.com/?';
+  private API_URL = 'https://www.omdbapi.com/?';
   private API_KEY = 'apikey=22df56fe';
 
   constructor(private http: HttpClient) {
