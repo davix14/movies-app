@@ -1,12 +1,19 @@
 <mat-card>
   <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm)">
     <mat-form-field>
-      <mat-label>Name:</mat-label>
+      <mat-label>Name</mat-label>
       <input matInput formControlName="name" type="text">
+      <mat-error *ngIf="registerForm.controls['name'].touched && registerForm.controls['name'].invalid">Please enter a name</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Username:</mat-label>
+      <mat-label>Username</mat-label>
       <input matInput formControlName="username" type="text">
+      <mat-error *ngIf="registerForm.controls['username'].touched && registerForm.controls['username'].invalid">Please enter a username</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="text">
+      <mat-error *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].invalid">Please enter a password at least 3 characters long</mat-error>
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit">Register</button>
   </form>

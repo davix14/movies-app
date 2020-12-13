@@ -18,7 +18,8 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       username: ['', {validators: [Validators.minLength(3), Validators.required]}],
-      name: ['', {validators: [Validators.required, Validators.minLength(3)]}]
+      name: ['', {validators: [Validators.required, Validators.minLength(3)]}],
+      password: ['', {validators: [Validators.required, Validators.minLength(3)]}]
     });
     this.sessionService.getUserUpdated()
       .subscribe((user: User) => {
