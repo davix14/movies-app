@@ -36,7 +36,6 @@ export class RegisterFormComponent implements OnInit {
     if (!userForm.valid) {
       return null;
     } else {
-      // TODO Add call to User Service to add new user to DB
       const current = new Date(); // Create date obj for Timestamp
       const success: boolean = this.sessionService.registerUser(
         userForm.value.name,
