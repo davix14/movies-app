@@ -21,15 +21,16 @@ export class RegisterFormComponent implements OnInit {
       name: ['', {validators: [Validators.required, Validators.minLength(3)]}],
       password: ['', {validators: [Validators.required, Validators.minLength(3)]}]
     });
-    this.sessionService.getUserUpdated()
+    /*this.sessionService.getUserUpdated()
       .subscribe((user: User) => {
         if (user != null) {
+          // console.log(user);
           this.registerForm.reset();
           this.router.navigate(['']);
         } else {
 
         }
-      });
+      });*/
   }
 
   registerUser(userForm: FormGroup) {
@@ -37,16 +38,19 @@ export class RegisterFormComponent implements OnInit {
       return null;
     } else {
       const current = new Date(); // Create date obj for Timestamp
-      const success: boolean = this.sessionService.registerUser(
+      this.sessionService.registerUser(
         userForm.value.name,
         userForm.value.username,
+        userForm.value.password,
         current.getTime()
-      );
-      /*if (success){
-      this.registerForm.reset();
-      } else {
-        console.log('Registration FAILED');
-      }*/
+      )
+        .subscribe((responseData) => {
+          if (responseData != null) {
+            console.log('User successfully added');
+            this.registerForm.reset();
+            this.router.navigate(['']);
+          }
+        });
     }
   }
 

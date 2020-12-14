@@ -31,30 +31,40 @@ export class SessionService {
       });*/
   }
 
-  registerUser(name: string, username: string, date: number): boolean {
+  registerUser(name: string, username: string, password: string, date: number) {
     const userData: User = {
       id: null,
       name: name,
       username: username,
+      password: password,
       registrationDate: date,
       lastUpdate: date
     };
-    try{
-    this.http
+    return this.http
       .post<{ message: string, user: User }>('http://localhost:3000/api/users/newUser', userData)
-      .subscribe((responseData) => {
-        if (responseData.user != null){
-        this.user = responseData.user;
-        this.userUpdated.next([this.user]);
+      .pipe<User>(
+        map(resp => {
+          return {
+            id: resp.user.id,
+            name: resp.user.name,
+            username: resp.user.username,
+            password: resp.user.password,
+            registrationDate: resp.user.registrationDate,
+            lastUpdate: resp.user.lastUpdate
+          };
+        })
+      );
+    /*.subscribe((responseData) => {
+      if (responseData != null) {
+        // console.log(responseData);
+        // this.user = responseData;
+        // this.userUpdated.next(this.user);
         return true;
-        } else {
-          return false;
-        }
-      });
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
+      } else {
+        return false;
+      }
+    });*/
+
   }
 
 }
