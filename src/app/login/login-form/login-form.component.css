@@ -1,7 +1,12 @@
 button {
-  margin-left: 1rem;
+
 }
 
 mat-card {
   padding: 1rem;
+}
+
+mat-form-field {
+  display: block;
+  width: 45%;
 }

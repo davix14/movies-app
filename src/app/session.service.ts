@@ -18,17 +18,21 @@ export class SessionService {
     return this.userUpdated.asObservable();
   }
 
-  startLogin(username: string) {
-    /*this.http
-      .get('http://localhost:3000/api/movies')
-      .pipe(
+  login(username: string, password: string) {
+    const credentials = {
+      username,
+      password
+    };
+    this.http
+      .post('http://localhost:3000/api/users/login', credentials)
+      /*.pipe(
         map(userData => {
           return null;
         })
-      )
-      .subscribe(() => {
-
-      });*/
+      )*/
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
   registerUser(name: string, username: string, password: string, date: number) {
