@@ -45,7 +45,7 @@ export class RegisterFormComponent implements OnInit {
         current.getTime()
       )
         .subscribe((responseData) => {
-          if (responseData != null) {
+          if (responseData.success === true) {
             console.log('User successfully added');
             this.registerForm.reset();
             this.router.navigate(['']);

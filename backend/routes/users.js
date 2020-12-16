@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/login', (req, res) => {
     let fetchedUser;
+    let token;
     User.findOne({username: req.body.username})
       .then(user => {
         if (!user) {
@@ -15,7 +16,7 @@ router.post('/login', (req, res) => {
           });
         }
         fetchedUser = user;
-        console.log(fetchedUser);
+        // console.log(fetchedUser);
         return bcrypt.compare(req.body.password, fetchedUser.password);
       })
       .then(result => {
@@ -24,15 +25,21 @@ router.post('/login', (req, res) => {
             message: 'Authorization Failed'
           });
         }
-        const token = jwt.sign(
+        token = jwt.sign(
           {username: fetchedUser.username, userId: fetchedUser._id},
           'secret-should-be-longer',
           {expiresIn: '1h'}
         );
+        console.log(fetchedUser + token);
         res.status(200).json({
-          authUser: fetchedUser,
-          token: token
+          authUser: {
+            ...fetchedUser._doc
+          },
+          password: token
         });
+      })
+      .catch((e) => {
+        console.log(e);
       });
   }
 );
@@ -53,15 +60,20 @@ router.post('/newUser', (req, res) => {
         .then(createdUser => {
           res.status(201).json({
             message: 'User added successfully',
-            user: {
+            /*user: {
               ...createdUser._doc,
               id: createdUser._doc._id
-            }
+            }*/
+            success: true
           });
           console.log(createdUser);
         })
         .catch((e) => {
           console.log(e);
+          res.status(400).json({
+            message: 'User not added',
+            success: false
+          });
         });
     });
 
