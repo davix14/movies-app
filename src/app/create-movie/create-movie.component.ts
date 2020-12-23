@@ -25,7 +25,8 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
               public movieService: MoviesService,
-              public rtr: Router, private dialogRef: MatDialogRef<CreateMovieComponent>
+              public rtr: Router,
+              private dialogRef: MatDialogRef<CreateMovieComponent>
   ) {
   } // Injecting Form Builder (to build forms) and
     // movieService (to be able to edit, add, delete movies)

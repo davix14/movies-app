@@ -13,15 +13,18 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
   movies: Movie[] = [];
   @Output() editClicked = new EventEmitter();
   private movieSub: Subscription;
+  isLoading: boolean;
 
   constructor(public moviesService: MoviesService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.moviesService.getMovies();
     this.movieSub = this.moviesService.getMovieUpdateListener()
       .subscribe((movies: Movie[]) => {
         this.movies = movies;
+        this.isLoading = false;
       });
   }
 
@@ -41,8 +44,5 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
   onEditMovie(idIn: string) {
     this.moviesService.startEditMovie(idIn);
     this.editClicked.emit();
-    if (this.router.url === '/list') {
-      this.router.navigate(['create']);
     }
-  }
 }

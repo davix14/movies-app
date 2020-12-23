@@ -4,7 +4,7 @@ const Movie = require("../models/movie");
 const router = express.Router();
 const checkAuth = require('../middleware/check-Auth');
 
-router.get("", checkAuth,(req, res) => {
+router.get("", (req, res) => {
   Movie.find().then(documents => {
     res.status(200).json({
       message: 'Successfully got movies from MongoDB',

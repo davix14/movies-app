@@ -18,18 +18,20 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppHomeComponent} from './app-home/app-home.component';
 import {SearchComponent} from './search/search.component';
 import {SearchResultsComponent} from './search/search-results/search-results.component';
 import {SearchEntryComponent} from './search/search-entry/search-entry.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import { LoginComponent } from './login/login.component';
-import { LoginFormComponent } from './login/login-form/login-form.component';
-import { NewUserComponent } from './new-user/new-user.component';
-import { RegisterFormComponent } from './new-user/register-form/register-form.component';
+import {LoginComponent} from './login/login.component';
+import {LoginFormComponent} from './login/login-form/login-form.component';
+import {NewUserComponent} from './new-user/new-user.component';
+import {RegisterFormComponent} from './new-user/register-form/register-form.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {AuthInterceptor} from './auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -64,12 +66,15 @@ import {MatMenuModule} from '@angular/material/menu';
     HttpClientModule,
     MatGridListModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
     CreateMovieComponent
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

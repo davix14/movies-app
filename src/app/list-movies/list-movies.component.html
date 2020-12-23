@@ -1,4 +1,5 @@
-<mat-accordion *ngIf="movies.length > 0" [multi]="false">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion *ngIf="movies.length > 0 && this.isLoading === false" [multi]="false">
   <mat-expansion-panel *ngFor="let movie of movies">
     <mat-expansion-panel-header>
       {{ movie.title }}
