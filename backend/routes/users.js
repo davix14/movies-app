@@ -35,7 +35,8 @@ router.post('/login', (req, res) => {
           authUser: {
             ...fetchedUser._doc
           },
-          password: token
+          password: token,
+          expiresIn: 3600
         });
       })
       .catch((e) => {
