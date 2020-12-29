@@ -9,8 +9,7 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class SessionService {
-  private user: User;
-  private token: string;
+  private user: User = null;
   private tokenUpdated = new BehaviorSubject(null);
   private userUpdated = new BehaviorSubject(null);
 
@@ -40,14 +39,14 @@ export class SessionService {
       .subscribe((response) => {
         console.log(response.authUser);
         this.user = response.authUser;
-        this.token = response.token;
-        this.tokenUpdated.next(this.token);
+        this.tokenUpdated.next(response.token);
         this.userUpdated.next(this.user);
         this.router.navigate(['/home']);
       });
   }
 
   registerUser(name: string, username: string, password: string, date: number) {
+    // Create
     const userData: User = {
       id: null,
       name,
@@ -82,6 +81,13 @@ export class SessionService {
       }
     });*/
 
+  }
+
+  logout() {
+    //  Set all authentication information to false when logging out
+    this.tokenUpdated.next(null);
+    this.userUpdated.next(null);
+    this.user = null;
   }
 
 }
