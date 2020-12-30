@@ -124,9 +124,9 @@ export class SessionService {
     console.log('User has been logged out');
   }
 
-  private setAuthTimer(duration: number) {
-    console.log('Setting timer: ' + duration);
-    this.tokenTimer = setTimeout(() => {
+  private setAuthTimer(duration: number) { //  Method to set a timer for the token timeout
+    console.log('Setting timer: ' + duration); //  Console log the duration
+    this.tokenTimer = setTimeout(() => { //  Set timeout and call logout method when the timer runs out
       this.logout();
     }, duration * 1000);
   }
