@@ -8,7 +8,7 @@ import {SessionService} from '../session.service';
 })
 export class AppHeaderComponent implements OnInit {
 
-  constructor(public sessionService: SessionService) {
+  constructor(public sessionService: SessionService) { //  inject sessionService to get access to methods
   }
 
   ngOnInit(): void {

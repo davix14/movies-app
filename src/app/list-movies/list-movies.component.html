@@ -5,9 +5,18 @@
       {{ movie.title }}
     </mat-expansion-panel-header>
     <mat-list>
-      <mat-list-item>Rating:  {{ movie.rating }}</mat-list-item>
-      <mat-list-item>Description:  {{ movie.description }}</mat-list-item>
-      <mat-list-item>Last Updated: {{ formatDate(movie.dateEntered) }} </mat-list-item>
+      <mat-list-item>
+        <mat-icon>star</mat-icon>
+        <span>Rating:  {{ movie.rating }}</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>rate_review</mat-icon>
+        <span>Description:  {{ movie.description }}</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>history</mat-icon>
+        <span>Last Updated: {{ formatDate(movie.dateEntered) }}</span>
+      </mat-list-item>
     </mat-list>
     <mat-action-row>
       <button mat-button color="primary" (click)="onEditMovie(movie.id)">EDIT</button>
