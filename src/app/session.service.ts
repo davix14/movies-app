@@ -76,7 +76,7 @@ export class SessionService {
       })x1
     )*/
       .subscribe((response) => {
-        console.log(response.authUser);
+        // console.log(response.authUser);
         const expiresInDuration = response.expiresIn;
         this.setAuthTimer(expiresInDuration);
         this.user = response.authUser;
