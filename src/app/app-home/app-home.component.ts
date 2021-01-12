@@ -9,18 +9,18 @@ import {CreateMovieComponent} from '../create-movie/create-movie.component';
 })
 export class AppHomeComponent implements OnInit {
 
-  constructor(private diag: MatDialog) {
+  constructor(private diag: MatDialog) { //  Injected MatDialog to use pop-up modal
   }
 
   ngOnInit(): void {
   }
 
-  openEnterMovie() {
-    const dialogRef = this.diag.open(CreateMovieComponent, {
+  openEnterMovie() { //  Method to handle opening and closing pop-up modal
+    const dialogRef = this.diag.open(CreateMovieComponent, { //  use injected diag to open modal using CreateMovieComponent and give it a set width
       width: '400px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => { //  Set action to take once dialog box is closed
       console.log('The dialog was closed');
     });
   }

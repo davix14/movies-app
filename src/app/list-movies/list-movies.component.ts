@@ -10,39 +10,39 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./list-movies.component.css']
 })
 export class ListMoviesComponent implements OnInit, OnDestroy {
-  movies: Movie[] = [];
-  @Output() editClicked = new EventEmitter();
+  movies: Movie[] = []; //  Holds movies received from movies service
+  @Output() editClicked = new EventEmitter(); //  ng Output and eventEmitter to let parent component know when edit is clicked
   private movieSub: Subscription;
-  isLoading: boolean;
+  isLoading: boolean; //  Indicator used to display spinner
 
   constructor(public moviesService: MoviesService, private router: Router) {
   }
 
-  ngOnInit(): void {
-    this.isLoading = true;
-    this.moviesService.getMovies();
-    this.movieSub = this.moviesService.getMovieUpdateListener()
-      .subscribe((movies: Movie[]) => {
-        this.movies = movies;
-        this.isLoading = false;
+  ngOnInit(): void { //  On Initialization:
+    this.isLoading = true; //  Set is loading to true
+    this.moviesService.getMovies(); //  Calls service to request movies from server
+    this.movieSub = this.moviesService.getMovieUpdateListener() //  Sets up the subscription to the moviesUpdated subject
+      .subscribe((movies: Movie[]) => { //  When moviesUpdated has new value:
+        this.movies = movies; //  Copy incoming movies
+        this.isLoading = false; //  Set isLoading to false since we have the movies now
       });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy() { //  Unsubscribe when destroying
     this.movieSub.unsubscribe();
   }
 
-  onDeleteMovie(id: string) {
+  onDeleteMovie(id: string) { //  Call movie service to delete move based on id passed
     this.moviesService.deleteMovie(id);
   }
 
-  formatDate(date: number): string {
+  formatDate(date: number): string { //  method to turn timestamp to string
     const format = new Date(date);
     return format.toDateString();
   }
 
-  onEditMovie(idIn: string) {
-    this.moviesService.startEditMovie(idIn);
+  onEditMovie(idIn: string) { //  method for editing movie
+    this.moviesService.startEditMovie(idIn); //
     this.editClicked.emit();
     }
 }
