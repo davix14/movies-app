@@ -1,7 +1,9 @@
 <div class="home-container">
-<!-- Button in place to allow user to open dialog box when needed -->
-  <button mat-raised-button color="primary" class="enterButton" (click)="openEnterMovie()">Enter New Movie</button>
+  <!-- Button in place to allow user to open dialog box when needed -->
+  <button mat-raised-button color="primary"
+          class="enterButton"
+          (click)="openEnterMovie()">Enter New Movie</button>
   <br>
-<!-- When edit is clicked in movies-list it fires an event which is used to open dialog window here -->
+  <!-- When edit is clicked in movies-list it fires an event which is used to open dialog window here -->
   <app-list-movies (editClicked)="openEnterMovie()"></app-list-movies>
 </div>
