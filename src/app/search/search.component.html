@@ -1,7 +1,7 @@
 <div class="search-container">
   <app-search-entry (searchInput)="getResults($event)"></app-search-entry>
   <br>
-  <mat-grid-list cols="1" rowHeight="4:3">
+  <mat-grid-list [cols]="gridColNums" [rowHeight]="gridRowHeight">
     <mat-grid-tile *ngFor="let result of results">
       <app-search-results [sr]="result"></app-search-results>
     </mat-grid-tile>
