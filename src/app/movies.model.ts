@@ -4,4 +4,6 @@ export interface Movie {
   rating: number;
   description: string;
   dateEntered: number;
+  dateChanged: number;
+  creator: string;
 }

@@ -20,7 +20,7 @@ export class SearchMoviesService {
 
   searchForMany(param: string) {
     this.http
-      .get(this.API_URL + this.API_KEY + '&s=' + param)
+      .get(this.API_URL + this.API_KEY + '&s=' + param, { headers: { Anonymous: '' } })
       .subscribe(value => {
         this.moviesUpdated.next(value);
       });

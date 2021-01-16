@@ -5,6 +5,7 @@ import {MoviesService} from '../movies.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {MatDialogRef} from '@angular/material/dialog';
+import {SessionService} from '../session.service';
 
 @Component({
   selector: 'app-create-movie',
@@ -25,6 +26,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
               public movieService: MoviesService,
+              public sessionService: SessionService,
               public rtr: Router,
               private dialogRef: MatDialogRef<CreateMovieComponent>
   ) {
@@ -84,7 +86,8 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
         form.value.title,
         form.value.rating,
         form.value.description,
-        current.getTime());
+        current.getTime(),
+        this.sessionService.getUserId());
 
       this.myForm.reset(); //  Reset the form
       this.form.resetForm(); // Reset form errors
@@ -99,7 +102,9 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
         form.value.title,
         form.value.rating,
         form.value.description,
-        current.getTime());
+        this.editing.movie.dateEntered,
+        current.getTime(),
+        this.editing.movie.creator);
 
       this.editing.mode = false; //  Change edit mode to false
       this.myForm.reset(); //  Reset the form

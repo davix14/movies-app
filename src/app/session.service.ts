@@ -10,11 +10,20 @@ import {Router} from '@angular/router';
 export class SessionService {
   private user: User = null;
   private tokenUpdated = new BehaviorSubject(null);
+  private token: string;
   private userUpdated = new BehaviorSubject(null);
   private tokenTimer: any;
   isAuthenticated = false;
 
   constructor(private http: HttpClient, private router: Router) {
+  }
+
+  getUserId() {
+    return this.user.id;
+  }
+
+  getToken() {
+    return this.token;
   }
 
   getIsAuthenticated() {
@@ -85,6 +94,7 @@ export class SessionService {
         this.setAuthTimer(expiresInDuration); //  setAuthTimer for timeout of token
         this.user = response.authUser; //  set user to user obj returned
         this.tokenUpdated.next(response.token); //  save and broadcast token
+        this.token = response.token;
         this.userUpdated.next(this.user); // save and broadcast user
         this.isAuthenticated = true; //  Set isAuthenticated to true
         const now = new Date(); //  create new date obj
@@ -105,6 +115,7 @@ export class SessionService {
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime(); //  compare expiration date with current timestamp
     if (expiresIn > 0) { //  If ^ is > 0 then token is still valid and information can still be used
       this.tokenUpdated.next(authInformation.token);
+      this.token = authInformation.token;
       this.isAuthenticated = true;
       this.user = authInformation.user;
       this.userUpdated.next(this.user);
@@ -116,6 +127,7 @@ export class SessionService {
   logout() {
     //  Set all authentication information to false when logging out
     this.tokenUpdated.next(null);
+    this.token = null;
     this.userUpdated.next(null);
     this.user = null;
     this.isAuthenticated = false;

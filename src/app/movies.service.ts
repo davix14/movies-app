@@ -8,15 +8,7 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MoviesService {
-  private allMovies: Movie[] = [
-    {
-      id: null,
-      title: 'Old WOWZA',
-      rating: 4,
-      description: 'green',
-      dateEntered: null
-    }
-  ]; //  Holds all movies - added one as placeholder to see changes to list component
+  private allMovies: Movie[] = []; //  Holds all movies - added one as placeholder to see changes to list component
   private moviesUpdated = new Subject<Movie[]>(); //  Used to update all required places
   private movieEdit = new BehaviorSubject<Movie[]>(null); //  Used to update all required places
   constructor(private http: HttpClient) {
@@ -33,7 +25,8 @@ export class MoviesService {
               title: movie.title,
               rating: movie.rating,
               description: movie.description,
-              dateEntered: movie.dateEntered
+              dateEntered: movie.dateEntered,
+              creator: movie.creator
             };
           });
         })
@@ -60,13 +53,18 @@ export class MoviesService {
     this.movieEdit.next(null);
   }
 
-  sendEditMovie(idIn: string, titleIn: string, ratingIn: number, descriptionIn: string, dateEnteredIn: number) {
+  sendEditMovie(idIn: string, titleIn: string,
+                ratingIn: number, descriptionIn: string,
+                dateEnteredIn: number, dateChangedIn: number,
+                creatorIn: string) {
     const movie: Movie = { //  Create new Movie obj
       id: idIn,
       title: titleIn,
       rating: ratingIn,
       description: descriptionIn,
-      dateEntered: dateEnteredIn
+      dateEntered: dateEnteredIn,
+      dateChanged: dateChangedIn,
+      creator: creatorIn
     };
     this.http //  Send PUT to backend and attach movie obj
       .put<{ message: string }>('http://localhost:3000/api/movies', movie)
@@ -83,13 +81,17 @@ export class MoviesService {
       });
   }
 
-  addMovie(titleIn: string, ratingIn: number, descriptionIn: string, dateEnteredIn: number) {
+  addMovie(titleIn: string, ratingIn: number,
+           descriptionIn: string, dateEnteredIn: number,
+           creatorIn: string) {
     const movie: Movie = {
       id: null,
       title: titleIn,
       rating: ratingIn,
       description: descriptionIn,
-      dateEntered: dateEnteredIn
+      dateEntered: dateEnteredIn,
+      dateChanged: dateEnteredIn,
+      creator: creatorIn
     };
     this.http
       .post<{ message: string; movieId: string }>('http://localhost:3000/api/movies', movie)
@@ -103,7 +105,7 @@ export class MoviesService {
 
   deleteMovie(id: string) {
     this.http
-      .delete('http://localhost:3000/api/movies' + id)
+      .delete('http://localhost:3000/api/movies/' + id)
       .subscribe(() => {
         this.allMovies = this.allMovies.filter(movie => movie.id !== id);
         this.moviesUpdated.next([...this.allMovies]);
