@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {User} from './user.model';
 import {Router} from '@angular/router';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +50,7 @@ export class SessionService {
       lastUpdate: date
     };
     return this.http
-      .post<{ message: string, success: boolean }>('http://localhost:3000/api/users/newUser', userData);
+      .post<{ message: string, success: boolean }>(environment.api_url + '/api/users/newUser', userData);
     /*.pipe<User>(
       map(resp => {
         return {
@@ -82,7 +83,7 @@ export class SessionService {
       password
     };
     return this.http //  Make http post request to the server including the credentials object
-      .post<{ authUser: User, token: string, expiresIn: number }>('http://localhost:3000/api/users/login', credentials)
+      .post<{ authUser: User, token: string, expiresIn: number }>(environment.api_url + '/api/users/login', credentials)
       /*.pipe(
       map(userData => {
         return null

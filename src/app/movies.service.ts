@@ -3,6 +3,7 @@ import {Movie} from './movies.model';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class MoviesService {
 
   getMovies() {
 
-    this.http.get<{ message: string, movies: any }>('http://localhost:3000/api/movies')
+    this.http.get<{ message: string, movies: any }>(environment.api_url + '/api/movies')
       .pipe(
         map(movieData => {
           return movieData.movies.map(movie => {
@@ -67,7 +68,7 @@ export class MoviesService {
       creator: creatorIn
     };
     this.http //  Send PUT to backend and attach movie obj
-      .put<{ message: string }>('http://localhost:3000/api/movies', movie)
+      .put<{ message: string }>(environment.api_url + '/api/movies', movie)
       .subscribe(() => { //  When successful
         this.allMovies.forEach((value: Movie) => { //  Check each entry
           if (value.id === movie.id) { // Replace Values of local array once DB is updated IF equal to id of updated movie
@@ -94,7 +95,7 @@ export class MoviesService {
       creator: creatorIn
     };
     this.http
-      .post<{ message: string; movieId: string }>('http://localhost:3000/api/movies', movie)
+      .post<{ message: string; movieId: string }>(environment.api_url + '/api/movies', movie)
       .subscribe((responseData) => {
         movie.id = responseData.movieId;
         this.allMovies.push(movie); //  Adds new movie to Movies array
@@ -105,7 +106,7 @@ export class MoviesService {
 
   deleteMovie(id: string) {
     this.http
-      .delete('http://localhost:3000/api/movies/' + id)
+      .delete(environment.api_url + '/api/movies/' + id)
       .subscribe(() => {
         this.allMovies = this.allMovies.filter(movie => movie.id !== id);
         this.moviesUpdated.next([...this.allMovies]);
