@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const moviesRoutes = require('./routes/movies');
 const usersRoutes = require('./routes/users');
@@ -23,6 +24,7 @@ mongoose
 // Middleware for parsing JSON data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use("/", express.static(path.join(__dirname, "movies-app")));
 
 // Added middleware to add headers to response
 app.use((req, res, next) => {
@@ -46,5 +48,8 @@ app.use((req, res, next) => {
 
 app.use('/api/movies', moviesRoutes);
 app.use('/api/users', usersRoutes);
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "movies-app", "index.html"));
+});
 
 module.exports = app;
