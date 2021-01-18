@@ -57,7 +57,7 @@ exports.register = (req, res) => { //  Route for registering new user
 
       newUser.save() //  Use mongoose object to save it to the DB
         .then(createdUser => {  //  If saved successfully send back success message
-          res.status(201).json({
+          res.status(401).json({
             message: 'User added successfully',
             /*user: {
               ...createdUser._doc,

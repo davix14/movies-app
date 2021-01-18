@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {SessionService} from '../../session.service';
 import {User} from '../../user.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register-form',
@@ -12,7 +13,10 @@ import {User} from '../../user.model';
 export class RegisterFormComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private sessionService: SessionService) {
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private sessionService: SessionService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -31,6 +35,30 @@ export class RegisterFormComponent implements OnInit {
 
         }
       });*/
+    // this.sessionService.getLatestError()
+    //   .subscribe((error) => {
+    //     if (error != null) {
+    //       console.log(error.error.message);
+    //       const snackBarRef = this.snackBar
+    //         .open(
+    //           error.error.message,
+    //           'Dismiss',
+    //           {
+    //             duration: 5000,
+    //             horizontalPosition: 'center',
+    //             verticalPosition: 'bottom'
+    //           });
+    //       snackBarRef.onAction()
+    //         .subscribe(() => {
+    //           // console.log('Action USED!');
+    //         })
+    //       snackBarRef.containerInstance._onExit
+    //         .subscribe(() => {
+    //           this.sessionService.resetLatestError();
+    //         });
+    //     }
+    //   });
+
   }
 
   registerUser(userForm: FormGroup) {
@@ -50,6 +78,26 @@ export class RegisterFormComponent implements OnInit {
             this.registerForm.reset();
             this.router.navigate(['']);
           }
+        }, (error) => {
+          // console.log(error);
+          // console.log(error.error.message);
+          const snackBarRef = this.snackBar
+            .open(
+              'Error Adding New User',
+              'Dismiss',
+              {
+                duration: 5000,
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom'
+              });
+          snackBarRef.onAction()
+            .subscribe(() => {
+              // console.log('Action USED!');
+            });
+          snackBarRef.containerInstance._onExit
+            .subscribe(() => {
+              this.sessionService.resetLatestError();
+            });
         });
     }
   }
