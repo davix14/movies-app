@@ -102,4 +102,8 @@ export class RegisterFormComponent implements OnInit {
     }
   }
 
+  cancel() {
+    this.router.navigate(['/login']);
+  }
+
 }

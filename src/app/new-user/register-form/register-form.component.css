@@ -10,3 +10,7 @@ mat-form-field {
 button {
   margin-top: 1rem;
 }
+
+.cancel-btn {
+  margin-left: 2vw;
+}
