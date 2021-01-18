@@ -30,6 +30,7 @@ import {LoginFormComponent} from './login/login-form/login-form.component';
 import {NewUserComponent} from './new-user/new-user.component';
 import {RegisterFormComponent} from './new-user/register-form/register-form.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AuthInterceptor} from './auth-interceptor';
 
@@ -67,7 +68,8 @@ import {AuthInterceptor} from './auth-interceptor';
     MatGridListModule,
     MatDialogModule,
     MatMenuModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   entryComponents: [
     CreateMovieComponent

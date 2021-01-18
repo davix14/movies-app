@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {User} from './user.model';
 import {Router} from '@angular/router';
 import {environment} from '../environments/environment';
@@ -15,6 +15,7 @@ export class SessionService {
   private userUpdated = new BehaviorSubject(null);
   private tokenTimer: any;
   isAuthenticated = false;
+  private latestError = new BehaviorSubject<HttpErrorResponse>(null);
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -25,6 +26,14 @@ export class SessionService {
 
   getToken() {
     return this.token;
+  }
+
+  getLatestError() {
+    return this.latestError.asObservable();
+  }
+
+  resetLatestError() {
+    this.latestError.next(null);
   }
 
   getIsAuthenticated() {
@@ -78,33 +87,37 @@ export class SessionService {
   }
 
   login(username: string, password: string) { // Method for authenticating the user
-    const credentials = { //  Create credentials obj to pass to server
-      username,
-      password
-    };
-    return this.http //  Make http post request to the server including the credentials object
-      .post<{ authUser: User, token: string, expiresIn: number }>(environment.api_url + '/api/users/login', credentials)
-      /*.pipe(
-      map(userData => {
-        return null
-      })x1
-    )*/
-      .subscribe((response) => {  // When response is received
-        // console.log(response.authUser);
-        const expiresInDuration = response.expiresIn; // set var to expiresIn time
-        this.setAuthTimer(expiresInDuration); //  setAuthTimer for timeout of token
-        this.user = response.authUser; //  set user to user obj returned
-        this.tokenUpdated.next(response.token); //  save and broadcast token
-        this.token = response.token;
-        this.userUpdated.next(this.user); // save and broadcast user
-        this.isAuthenticated = true; //  Set isAuthenticated to true
-        const now = new Date(); //  create new date obj
-        const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);  //  Calculate time token will expire by getting a timestamp
-        // and adding expiration time (transformed from milliseconds to sec)
-        console.log('Token expires in: ' + expirationDate);
-        this.saveAuthData(response.authUser, response.token, expirationDate); //  Save user obj, token, and expiration date in localstorage
-        this.router.navigate(['/home']); //  Navigate user to the home url
-      });
+    try {
+      const credentials = { //  Create credentials obj to pass to server
+        username,
+        password
+      };
+      return this.http //  Make http post request to the server including the credentials object
+        .post<{ authUser: User, token: string, expiresIn: number }>(environment.api_url + '/api/users/login', credentials)
+        .subscribe((response) => {  // When response is received
+          // console.log(response + 'REPOLY!!');
+          const expiresInDuration = response.expiresIn; // set var to expiresIn time
+          this.setAuthTimer(expiresInDuration); //  setAuthTimer for timeout of token
+          this.user = response.authUser; //  set user to user obj returned
+          this.tokenUpdated.next(response.token); //  save and broadcast token
+          this.token = response.token;
+          this.userUpdated.next(this.user); // save and broadcast user
+          this.isAuthenticated = true; //  Set isAuthenticated to true
+          const now = new Date(); //  create new date obj
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);  //  Calculate time token will expire by getting a timestamp
+          // and adding expiration time (transformed from milliseconds to sec)
+          // console.log('Token expires in: ' + expirationDate); for debugging
+          this.saveAuthData(response.authUser, response.token, expirationDate); //  Save user obj, token, and expiration date in localstorage
+          this.router.navigate(['/home']); //  Navigate user to the home url
+        }, (error => {
+          // console.log(error);
+          this.latestError.next(error);
+        }));
+    }
+    catch (e) {
+      console.log('HAPPY GILMORE!' + e);
+
+    }
   }
 
   autoAuthUser() {  // method to use local storage to get previously authenticated user
@@ -138,7 +151,7 @@ export class SessionService {
   }
 
   private setAuthTimer(duration: number) { //  Method to set a timer for the token timeout
-    console.log('Setting timer: ' + duration); //  Console log the duration
+    //console.log('Setting timer: ' + duration); //  Console log the duration
     this.tokenTimer = setTimeout(() => { //  Set timeout and call logout method when the timer runs out
       this.logout();
     }, duration * 1000);

@@ -9,7 +9,7 @@ exports.login = (req, res) => { //  Used to login and obtain a JWT from server
     .then(user => { //  STEP 1
       if (!user) { //  If user is not found return error response
         return res.status(401).json({
-          message: 'Authorization Failed'
+          message: 'Username not found'
         });
       }
       fetchedUser = user; //  If user retrieved then save it in local var
@@ -18,8 +18,9 @@ exports.login = (req, res) => { //  Used to login and obtain a JWT from server
     })
     .then(result => {
       if (!result) { //  If pw did not match return auth error
+        console.log('Incorrect Password');
         return res.status(401).json({
-          message: 'Authorization Failed'
+          message: 'Incorrect Password'
         });
       }
       token = jwt.sign( //  If pw matches, create a JWT using username and userID and set expiration time
@@ -33,11 +34,12 @@ exports.login = (req, res) => { //  Used to login and obtain a JWT from server
           ...fetchedUser._doc
         },
         token,
-        expiresIn: 3600
+        expiresIn: 3600,
+        message: 'Successful!'
       });
     })
     .catch((e) => { // Catch errors and log to console
-      console.log(e);
+      console.log('JOKEER!!' + e);
     });
 }
 
