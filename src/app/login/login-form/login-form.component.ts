@@ -43,7 +43,7 @@ export class LoginFormComponent implements OnInit {
           snackBarRef.onAction()
             .subscribe(() => {
               // console.log('Action USED!');
-            })
+            });
           snackBarRef.containerInstance._onExit
             .subscribe(() => {
               this.sessionService.resetLatestError();
@@ -53,14 +53,16 @@ export class LoginFormComponent implements OnInit {
   }
 
   onLogin(form: FormGroup) {
-    // console.log(form);
-    this.sessionService.login(
-      this.loginForm.value.username,
-      this.loginForm.value.password);
-    /*.subscribe((response) => {
+    if (form.valid) {
+      // console.log(form);
+      this.sessionService.login(
+        this.loginForm.value.username,
+        this.loginForm.value.password);
+      /*.subscribe((response) => {
 
-    });*/
-    // this.router.navigate(['/home']);
+      });*/
+      // this.router.navigate(['/home']);
+    }
     return null;
   }
 
