@@ -38,7 +38,7 @@ export class LoginFormComponent implements OnInit {
               {
                 duration: 5000,
                 horizontalPosition: 'center',
-                verticalPosition: 'bottom'
+                verticalPosition: 'top'
               });
           snackBarRef.onAction()
             .subscribe(() => {

@@ -9,7 +9,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 })
 export class SearchComponent implements OnInit {
   results: SearchResult[]; //  holds array of search results
-  gridRowHeight = '50vh'; //  Used to control the row height
+  gridRowHeight = '45vh'; //  Used to control the row height
   gridColNums = 1; //  Used to control the column #s in the grid
 
   constructor(public breakPointObserver: BreakpointObserver) { //  Injecting the breakpoint observer
@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit {
           this.gridRowHeight = '40vh'; //  IF tablet : - Shrink rowHeight
           this.gridColNums = 2; //  - Increase Col #
         } else { // -IF not tablet:
-          this.gridRowHeight = '50vh'; //  Set rowHeight and Col # back to defaults
+          this.gridRowHeight = '45vh'; //  Set rowHeight and Col # back to defaults
           this.gridColNums = 1;
         }
       });

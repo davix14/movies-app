@@ -33,6 +33,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AuthInterceptor} from './auth-interceptor';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {AuthInterceptor} from './auth-interceptor';
     MatDialogModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule
   ],
   entryComponents: [
     CreateMovieComponent
