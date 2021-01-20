@@ -41,8 +41,9 @@
             color="primary" type="submit">Submit</button>
     <button mat-raised-button class="cancelBttn"
             color="accent" type="button"
-            *ngIf="editing.mode != false || this.rtr.url === '/'"
             (click)="onCancel()">Cancel
+<!--            *ngIf="editing.mode != false || this.rtr.url === '/'"-->
+
     </button>
   </form>
 </mat-card>

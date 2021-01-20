@@ -20,7 +20,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
   }; //  Creating an obj for edit mode control
   @ViewChild(FormGroupDirective) form; // Instantiating this to be able to
   // clear form of errors after submitting
-  @ViewChild('title') titleField: ElementRef; //  Will store title element reference
+  // @ViewChild('title') titleField: ElementRef; //  Will store title element reference to focus on the field --NOT USED
 
   private editSub: Subscription;
 

@@ -17,7 +17,7 @@ export class AppHomeComponent implements OnInit {
 
   openEnterMovie() { //  Method to handle opening and closing pop-up modal
     const dialogRef = this.diag.open(CreateMovieComponent, { //  use injected diag to open modal using CreateMovieComponent and give it a set width
-      width: '400px',
+      width: '200vw',
     });
 
     dialogRef.afterClosed().subscribe(result => { //  Set action to take once dialog box is closed
