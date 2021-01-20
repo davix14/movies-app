@@ -1,9 +1,8 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Movie} from '../movies.model';
 import {MoviesService} from '../movies.service';
 import {Subscription} from 'rxjs';
-import {Router} from '@angular/router';
 import {MatDialogRef} from '@angular/material/dialog';
 import {SessionService} from '../session.service';
 
@@ -27,7 +26,6 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               public movieService: MoviesService,
               public sessionService: SessionService,
-              public rtr: Router,
               private dialogRef: MatDialogRef<CreateMovieComponent>
   ) {
   } // Injecting Form Builder (to build forms) and
@@ -47,14 +45,14 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     this.editSub = this.movieService.getEditMovieUpdateListener() //  Created update listener for editing purposes
       .subscribe((movie: Movie[]) => { // Subscribe to editing obj.movie to hold movie to be edited
         if (movie != null) {
-          this.editing.movie = movie[0]; //  when editing movie is receieved editing is filled with it
+          this.editing.movie = movie[0]; //  when editing movie is received editing is filled with it
           // console.log(this.editing.movie);
           this.onEdit(); //  Call function to kick off editing flow
         }
       });
   }
 
-  ngOnDestroy() { //  Added unsubcribe when component is deleted
+  ngOnDestroy() { //  Added unsubscribe when component is deleted
     this.editSub.unsubscribe();
   }
 
