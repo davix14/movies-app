@@ -102,17 +102,14 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
         form.value.title,
         form.value.rating,
         form.value.description,
-        this.editing.movie.dateEntered,
-        current.getTime(),
-        this.editing.movie.creator);
+        this.editing.movie.dateEntered, //  Date entered
+        current.getTime(), //  Date changed
+        this.editing.movie.creator); //  ID of the user logged in
 
       this.editing.mode = false; //  Change edit mode to false
       this.myForm.reset(); //  Reset the form
       this.form.resetForm(); // Reset form errors
-      if (this.rtr.url === '/create') {
-        this.rtr.navigate(['list']); //  Navigate back to List page
-      }
-      this.dialogRef.close();
+      this.dialogRef.close(); //  Close the dialog
       return null;
     }
   }
