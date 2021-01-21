@@ -6,4 +6,6 @@ export interface Movie {
   dateEntered: number;
   dateChanged: number;
   creator: string;
+  savedSearchResult: object;
+  tags: Array<string>;
 }

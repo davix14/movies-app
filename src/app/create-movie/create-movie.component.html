@@ -6,44 +6,83 @@
      - Added conditional messages for validations
      - Keep colors like the buttons and fields neutral/colorful until validation triggers
  -->
-<mat-card>
+<mat-dialog-content>
+
   <h2 *ngIf="editing.mode == false">New Movie Entry</h2>
   <h2 *ngIf="editing.mode == true">Edit Movie Entry</h2>
   <form [formGroup]="myForm" (submit)="onSubmit(myForm)">
-    <mat-form-field>
-      <mat-label>Title:</mat-label>
-      <input
-        matInput
-        #title
-        formControlName="title"/>
-      <mat-error>
-        Title is required
-      </mat-error>
-    </mat-form-field>
-    <mat-label>Rating:</mat-label>
-    <mat-slider
-      thumbLabel
-      min="0"
-      max="5"
-      step="0.5"
-      tickInterval="1"
-      formControlName="rating">Rating
-    </mat-slider>
-    <!--    <mat-error *ngIf="myForm.controls.rating.pristine && submitted == true">ERROROOROOR!</mat-error>
-              TODO Figure out how to warn users when submitting form without touching rating-->
-    <mat-form-field>
-      <mat-label>Description <i>(Optional)</i>:</mat-label>
-      <textarea
-        matInput
-        formControlName="description"></textarea>
-    </mat-form-field>
-    <button mat-raised-button class="submitBttn"
-            color="primary" type="submit">Submit</button>
-    <button mat-raised-button class="cancelBttn"
-            color="accent" type="button"
-            (click)="onCancel()">Cancel
-<!--            *ngIf="editing.mode != false || this.rtr.url === '/'"-->
+    <mat-horizontal-stepper labelPosition="bottom">
+      <!--    <mat-card>-->
+      <mat-step [optional]="true">
+        <ng-template matStepLabel>Search</ng-template>
+        <app-search></app-search>
+        <div>
+          <button mat-raised-button matStepperNext type="button">Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Entry</ng-template>
+        <mat-form-field>
+          <mat-label>Title:</mat-label>
+          <input
+            matInput
+            #title
+            formControlName="title"
+            [readonly]="selectedEntry ? true : false"/>
+          <mat-error>
+            Title is required
+          </mat-error>
+        </mat-form-field>
+        <mat-label>Rating:</mat-label>
+        <mat-slider
+          thumbLabel
+          min="0"
+          max="5"
+          step="0.5"
+          tickInterval="1"
+          formControlName="rating">Rating
+        </mat-slider>
+        <!--    <mat-error *ngIf="myForm.controls.rating.pristine && submitted == true">ERROROOROOR!</mat-error>
+                  TODO Figure out how to warn users when submitting form without touching rating-->
+        <mat-form-field>
+          <mat-label>Description <i>(Optional)</i>:</mat-label>
+          <textarea
+            matInput
+            formControlName="description"></textarea>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button matStepperNext type="button">Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Tags</ng-template>
+        <mat-form-field class="example-chip-list">
+          <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                      [removable]="removable" (removed)="remove(tag)">
+              {{tag}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="New fruit..."
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+        <button mat-raised-button class="submitBttn"
+                color="primary" type="submit">Submit</button>
+        <button mat-raised-button class="cancelBttn"
+                color="accent" type="button"
+                (click)="onCancel()">Cancel
+          <!--            *ngIf="editing.mode != false || this.rtr.url === '/'"-->
 
-    </button>
+        </button>
+      </mat-step>
+
+      <!--    </mat-card>-->
+    </mat-horizontal-stepper>
   </form>
-</mat-card>
+  <br>
+
+</mat-dialog-content>

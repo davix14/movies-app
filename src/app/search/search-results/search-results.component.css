@@ -9,7 +9,12 @@ div {
   display: block;
 }
 
-img { /*// NEW*/
+img {
+  display: block;
   height: 40%;
   width: 40%;
+}
+
+button {
+  margin-top: 2vh;
 }

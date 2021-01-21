@@ -6,7 +6,9 @@ const postSchema = mongoose.Schema({
   description: { type: String, required: false },
   dateEntered: { type: Number, required: true },
   dateChanged: { type: Number, required: true },
-  creator: { type: mongoose.Schema.Types.ObjectID, ref: "User", required: true }
+  creator: { type: mongoose.Schema.Types.ObjectID, ref: "User", required: true },
+  searchResult: { type: Object, required: false },
+  tags: { type: Array, required: false}
 });
 
 module.exports = mongoose.model('Movie', postSchema);

@@ -1,4 +1,5 @@
 const Movie = require("../models/movie");
+const SearchResult = require("../models/searchResult");
 
 exports.getAllForUser = (req, res) => {
   // console.log(req.body.userId);
@@ -17,15 +18,28 @@ exports.addNewOne = (req, res) => {
     description: req.body.description,
     dateEntered: req.body.dateEntered,
     dateChanged: req.body.dateEntered,
-    creator: req.body.userId
+    creator: req.body.userId,
+    searchResult: (req.body.searchResult ? {
+      ...req.body.searchResult
+    } : null),
+    tags: req.body.tags
   });
+  console.log(movie);
+  /*console.log(movie);
+  res.status(201).json({
+    message: 'Movie added successfully'
+  });*/
   movie.save().then(createdPost => {
     console.log(createdPost);
     res.status(201).json({
       message: 'Movie added successfully',
       movieId: createdPost._id
     });
-  });
+  })
+    .catch((err) => {
+      console.log(err);
+      res.status(402).json({ message: 'Error adding the entry!' });
+    });
 }
 
 exports.updateOne = (req, res) => {

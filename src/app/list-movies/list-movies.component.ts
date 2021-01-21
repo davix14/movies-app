@@ -23,6 +23,7 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
     this.moviesService.getMovies(); //  Calls service to request movies from server
     this.movieSub = this.moviesService.getMovieUpdateListener() //  Sets up the subscription to the moviesUpdated subject
       .subscribe((movies: Movie[]) => { //  When moviesUpdated has new value:
+        // console.log(movies);
         this.movies = movies; //  Copy incoming movies
         this.isLoading = false; //  Set isLoading to false since we have the movies now
       });

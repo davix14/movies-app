@@ -5,6 +5,13 @@ import {MoviesService} from '../movies.service';
 import {Subscription} from 'rxjs';
 import {MatDialogRef} from '@angular/material/dialog';
 import {SessionService} from '../session.service';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {SearchResult} from '../search/searchResult.model';
+
+export interface Fruit {
+  name: string;
+}
 
 @Component({
   selector: 'app-create-movie',
@@ -21,6 +28,14 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
   // clear form of errors after submitting
   // @ViewChild('title') titleField: ElementRef; //  Will store title element reference to focus on the field --NOT USED
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  tags: Array<string> = [];
+  public selectedEntry: SearchResult;
+  private savedSearchResult: Subscription;
   private editSub: Subscription;
 
   constructor(private fb: FormBuilder,
@@ -32,28 +47,62 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     // movieService (to be able to edit, add, delete movies)
 
   ngOnInit(): void {
+    this.selectedEntry = null;
     this.myForm = this.fb.group({ // Use formBuilder to create a reactive form
       title: ['', [
         Validators.required,
         Validators.minLength(1)
       ]],
       rating: '',
-      description: ''
+      description: '',
+      savedSelection: ''
     });
     this.editing.mode = false; // Set flag for edit mode to false
     // since 'edit' button has not been clicked
     this.editSub = this.movieService.getEditMovieUpdateListener() //  Created update listener for editing purposes
-      .subscribe((movie: Movie[]) => { // Subscribe to editing obj.movie to hold movie to be edited
-        if (movie != null) {
-          this.editing.movie = movie[0]; //  when editing movie is received editing is filled with it
-          // console.log(this.editing.movie);
-          this.onEdit(); //  Call function to kick off editing flow
-        }
-      });
+        .subscribe((movie: Movie[]) => { // Subscribe to editing obj.movie to hold movie to be edited
+          if (movie != null) {
+            this.editing.movie = movie[0]; //  when editing movie is received editing is filled with it
+            // console.log(this.editing.movie);
+            this.onEdit(); //  Call function to kick off editing flow
+          }
+        });
+    this.movieService.getSearchResultSelected()
+        .subscribe((sr: SearchResult) => {
+          if (sr != null){
+            this.selectedEntry = sr;
+            this.myForm.setValue({ title: sr.Title, rating: '', description: '', savedSelection: sr });
+          }
+        });
   }
 
   ngOnDestroy() { //  Added unsubscribe when component is deleted
     this.editSub.unsubscribe();
+  }
+
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value.trim();
+    console.log(value);
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.tags.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
   }
 
   onEdit() {
@@ -81,11 +130,13 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       // console.log(form.value); // FR DEBUG: Log to the new obj to console
 
       this.movieService.addMovie( //  Send new movie to service
-        form.value.title,
-        form.value.rating,
-        form.value.description,
-        current.getTime(),
-        this.sessionService.getUserId());
+          form.value.title,
+          form.value.rating,
+          form.value.description,
+          current.getTime(),
+          this.sessionService.getUserId(),
+          this.selectedEntry,
+          this.tags);
 
       this.myForm.reset(); //  Reset the form
       this.form.resetForm(); // Reset form errors
@@ -96,13 +147,13 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       return null; //  Return null to prevent reloading page
     } else { //  In editing Mode
       this.movieService.sendEditMovie( //  Send new movie to service
-        this.editing.movie.id,
-        form.value.title,
-        form.value.rating,
-        form.value.description,
-        this.editing.movie.dateEntered, //  Date entered
-        current.getTime(), //  Date changed
-        this.editing.movie.creator); //  ID of the user logged in
+          this.editing.movie.id,
+          form.value.title,
+          form.value.rating,
+          form.value.description,
+          this.editing.movie.dateEntered, //  Date entered
+          current.getTime(), //  Date changed
+          this.editing.movie.creator); //  ID of the user logged in
 
       this.editing.mode = false; //  Change edit mode to false
       this.myForm.reset(); //  Reset the form
