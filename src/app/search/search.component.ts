@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchResult} from './searchResult.model';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Subscription} from 'rxjs';
+import {Movie} from '../movies.model';
+import {MoviesService} from '../movies.service';
 
 @Component({
   selector: 'app-search',
@@ -11,8 +14,13 @@ export class SearchComponent implements OnInit {
   results: SearchResult[]; //  holds array of search results
   gridRowHeight = '45vh'; //  Used to control the row height
   gridColNums = 1; //  Used to control the column #s in the grid
+  private editing: Subscription;
+  edit = {
+    mode: null,
+    movie: null
+  };
 
-  constructor(public breakPointObserver: BreakpointObserver) { //  Injecting the breakpoint observer
+  constructor(public breakPointObserver: BreakpointObserver, private movieService: MoviesService) { //  Injecting the breakpoint observer
   }
 
   ngOnInit() {
@@ -27,6 +35,17 @@ export class SearchComponent implements OnInit {
         } else { // -IF not tablet:
           this.gridRowHeight = '45vh'; //  Set rowHeight and Col # back to defaults
           this.gridColNums = 1;
+        }
+      });
+    this.editing = this.movieService.getEditMovieUpdateListener()
+      .subscribe((movie: Movie[]) => {
+        // console.log(movie[0]);
+        if (movie != null){
+          this.edit.mode = true;
+          this.edit.movie = movie[0];
+        } else {
+          this.edit.mode = false;
+          this.edit.movie = null;
         }
       });
   }

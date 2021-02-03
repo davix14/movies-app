@@ -19,12 +19,11 @@ exports.addNewOne = (req, res) => {
     dateEntered: req.body.dateEntered,
     dateChanged: req.body.dateEntered,
     creator: req.body.userId,
-    searchResult: (req.body.searchResult ? {
-      ...req.body.searchResult
+    searchResult: (req.body.savedSearchResult ? {
+      ...req.body.savedSearchResult
     } : null),
     tags: req.body.tags
   });
-  console.log(movie);
   /*console.log(movie);
   res.status(201).json({
     message: 'Movie added successfully'
@@ -50,7 +49,9 @@ exports.updateOne = (req, res) => {
     description: req.body.description,
     dateEntered: req.body.dateEntered,
     dateChanged: req.body.dateChanged,
-    creator: req.body.creator
+    creator: req.body.creator,
+    searchResult: req.body.savedSearchResult,
+    tags: req.body.tags
   });
 
   Movie.updateOne({ _id: req.body.id, creator: req.body.userId }, movie).then(result => {

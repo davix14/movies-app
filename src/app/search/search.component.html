@@ -1,7 +1,12 @@
 <div class="search-container">
+  <app-search-results
+    class="previous-Selection"
+    *ngIf="edit.mode === true && this.edit.movie.savedSearchResult != null"
+    [sr]="this.edit.movie.savedSearchResult"></app-search-results>
+  <br>
   <app-search-entry (searchInput)="getResults($event)"></app-search-entry>
   <br>
-  <mat-grid-list [cols]="gridColNums" [rowHeight]="gridRowHeight">
+  <mat-grid-list *ngIf="results" [cols]="gridColNums" [rowHeight]="gridRowHeight">
     <mat-grid-tile *ngFor="let result of results">
       <app-search-results [sr]="result"></app-search-results>
     </mat-grid-tile>

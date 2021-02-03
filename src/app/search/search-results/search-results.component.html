@@ -2,7 +2,9 @@
   <mat-card-title>{{ sr.Title }}</mat-card-title>
   <mat-card-subtitle>{{ sr.Year }}</mat-card-subtitle>
   <mat-card-header>{{ sr.Type.toUpperCase() }}</mat-card-header>
-  <img [src]="sr.Poster">
+  <mat-card-content>
+    <img [src]="sr.Poster">
+  </mat-card-content>
   <!--<mat-card-content>
     <mat-label>Thoughts:</mat-label>
     <p>
@@ -12,7 +14,13 @@
   <mat-card-actions>
     <button mat-raised-button type="button">Edit</button>
   </mat-card-actions>-->
-  <button mat-stroked-button type="button" color="accent" (click)="movieSelected(sr)">Select</button>
+  <mat-card-actions>
+    <button
+      mat-stroked-button
+      type="button"
+      color="accent"
+      (click)="movieSelected(sr)">Select</button>
+  </mat-card-actions>
 </mat-card>
 <!--<div>-->
 <!--  <h1>{{ sr.Title }}</h1>-->

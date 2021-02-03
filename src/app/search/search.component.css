@@ -9,3 +9,7 @@ mat-grid-tile {
   display: block;
   /*margin: 0 5rem;*/
 }
+
+.previous-Selection {
+  margin-bottom: 30rem;
+}

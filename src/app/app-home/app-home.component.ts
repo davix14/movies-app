@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {CreateMovieComponent} from '../create-movie/create-movie.component';
+import {MoviesService} from '../movies.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import {CreateMovieComponent} from '../create-movie/create-movie.component';
 })
 export class AppHomeComponent implements OnInit {
 
-  constructor(private diag: MatDialog) { //  Injected MatDialog to use pop-up modal
+  constructor(private diag: MatDialog, private movieService: MoviesService) { //  Injected MatDialog to use pop-up modal
   }
 
   ngOnInit(): void {
@@ -22,6 +23,8 @@ export class AppHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => { //  Set action to take once dialog box is closed
       console.log('The dialog was closed');
+      this.movieService.clearSearchResultSelected();
+      this.movieService.cancelEditMovie();
     });
   }
 

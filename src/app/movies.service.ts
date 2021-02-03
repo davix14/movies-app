@@ -75,7 +75,7 @@ export class MoviesService {
   sendEditMovie(idIn: string, titleIn: string,
                 ratingIn: number, descriptionIn: string,
                 dateEnteredIn: number, dateChangedIn: number,
-                creatorIn: string) {
+                creatorIn: string, sr?: SearchResult, tags?: Array<string>) {
     const movie: Movie = { //  Create new Movie obj
       id: idIn,
       title: titleIn,
@@ -83,8 +83,11 @@ export class MoviesService {
       description: descriptionIn,
       dateEntered: dateEnteredIn,
       dateChanged: dateChangedIn,
-      creator: creatorIn
+      creator: creatorIn,
+      savedSearchResult: (sr ? sr : null),
+      tags: (tags ? tags : null)
     };
+    console.log(movie);
     this.http //  Send PUT to backend and attach movie obj
       .put<{ message: string }>(environment.api_url + '/api/movies', movie)
       .subscribe(() => { //  When successful
@@ -111,14 +114,18 @@ export class MoviesService {
       description: descriptionIn,
       dateEntered: dateEnteredIn,
       dateChanged: dateEnteredIn,
-      creator: creatorIn
+      creator: creatorIn,
+      savedSearchResult: sr,
+      tags
     };
-    const body = {...movie, searchResult: sr, tags};
-    console.log(body);
+    /*const body = {...movie, searchResult: sr, tags};
+    console.log(body);*/
+    // console.log(movie);
     this.http
-      .post<{ message: string; movieId: string }>(environment.api_url + '/api/movies', body)
+      .post<{ message: string; movieId: string }>(environment.api_url + '/api/movies', movie)
       .subscribe((responseData) => {
         movie.id = responseData.movieId;
+        // console.log(movie);
         this.allMovies.push(movie); //  Adds new movie to Movies array
         this.moviesUpdated.next([...this.allMovies]); //  Returns copy of Movies array
       });
