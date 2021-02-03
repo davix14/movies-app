@@ -59,13 +59,13 @@
       <mat-step>
         <ng-template matStepLabel>Tags</ng-template>
         <mat-form-field class="example-chip-list">
-          <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip-list #chipList aria-label="Tags selection">
             <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
                       [removable]="removable" (removed)="remove(tag)">
               {{tag}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="New fruit..."
+            <input placeholder="New tags..."
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
