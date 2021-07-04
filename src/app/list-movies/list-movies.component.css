@@ -1,7 +1,21 @@
 mat-spinner {
-  margin: auto;
+    margin: auto;
 }
 
 mat-icon {
-  margin-right: 1%;
+    margin-right: 1%;
+}
+
+mat-list {
+    display: block;
+}
+
+.poster {
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+    margin-right: 25px;
+    position: relative;
+    min-width: 200px;
+    margin-bottom: 20px;
 }
