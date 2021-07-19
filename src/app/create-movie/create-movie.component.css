@@ -8,6 +8,7 @@ mat-slider {
   margin: 0 40% 0 0;
 }
 
-.cancelBttn {
-  margin: 0 1rem;
+.stepperButtns {
+  margin-top: 5vh;
+  margin-right: 10px;
 }

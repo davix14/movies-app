@@ -35,6 +35,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AuthInterceptor} from './auth-interceptor';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatStepperModule} from '@angular/material/stepper';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatProgressSpinnerModule,
         MatSnackBarModule,
         MatChipsModule,
-        MatStepperModule
+        MatStepperModule,
+        FlexLayoutModule
     ],
   entryComponents: [
     CreateMovieComponent

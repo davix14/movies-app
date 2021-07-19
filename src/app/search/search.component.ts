@@ -24,7 +24,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breakPointObserver.observe([ //  Starting the breakPoint observer and breakpoints to check for below
+    /*this.breakPointObserver.observe([ //  Starting the breakPoint observer and breakpoints to check for below
       Breakpoints.Tablet, //  Breakpoint for Tablet size
     ])
       .subscribe(result => { //  Subscribing to breakpoint activity - result provides breakpoints triggered (?)
@@ -36,7 +36,7 @@ export class SearchComponent implements OnInit {
           this.gridRowHeight = '45vh'; //  Set rowHeight and Col # back to defaults
           this.gridColNums = 1;
         }
-      });
+      });*/
     this.editing = this.movieService.getEditMovieUpdateListener()
       .subscribe((movie: Movie[]) => {
         // console.log(movie[0]);

@@ -6,9 +6,20 @@
   <br>
   <app-search-entry (searchInput)="getResults($event)"></app-search-entry>
   <br>
-  <mat-grid-list *ngIf="results" [cols]="gridColNums" [rowHeight]="gridRowHeight">
+  <!--<mat-grid-list *ngIf="results" [cols]="gridColNums" [rowHeight]="gridRowHeight">
     <mat-grid-tile *ngFor="let result of results">
       <app-search-results [sr]="result"></app-search-results>
     </mat-grid-tile>
-  </mat-grid-list>
+  </mat-grid-list>-->
+
+  <div
+    class="displayResults"
+    fxLayout.xs="column"
+    fxLayout.lt-md="row wrap"
+    fxLayoutGap="20px grid"
+    fxLayoutAlign="center">
+    <div fxFlex="40%" *ngFor="let result of results">
+      <app-search-results [sr]="result"></app-search-results>
+    </div>
+  </div>
 </div>

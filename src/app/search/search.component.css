@@ -10,6 +10,10 @@ mat-grid-tile {
   /*margin: 0 5rem;*/
 }
 
+.displayResults {
+  margin-bottom: 15vh;
+}
+
 .previous-Selection {
   margin-bottom: 30rem;
 }
