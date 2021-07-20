@@ -18,8 +18,8 @@
         <i style="color: #757575">*click 'next' to skip</i>
         <app-search></app-search>
         <div>
-          <button mat-raised-button matStepperNext type="button">Next</button>
-          <button mat-raised-button type="button" color="accent" (click)="onCancel()">Cancel</button>
+          <button class="stepperButtns" mat-raised-button matStepperNext type="button">Next</button>
+          <button class="stepperButtns" mat-raised-button type="button" color="accent" (click)="onCancel()">Cancel</button>
         </div>
       </mat-step>
       <mat-step>
@@ -53,8 +53,8 @@
             formControlName="description"></textarea>
         </mat-form-field>
         <div>
-          <button mat-raised-button matStepperNext type="button">Next</button>
-          <button mat-raised-button type="button" color="accent" (click)="onCancel()">Cancel</button>
+          <button class="stepperButtns" mat-raised-button matStepperNext type="button">Next</button>
+          <button class="stepperButtns" mat-raised-button type="button" color="accent" (click)="onCancel()">Cancel</button>
         </div>
       </mat-step>
       <mat-step>
@@ -73,9 +73,9 @@
                    (matChipInputTokenEnd)="add($event)">
           </mat-chip-list>
         </mat-form-field>
-        <button mat-raised-button class="submitBttn"
+        <button class="stepperButtns" mat-raised-button class="submitBttn"
                 color="primary" type="submit">Submit</button>
-        <button mat-raised-button class="cancelBttn"
+        <button class="stepperButtns" mat-raised-button class="cancelBttn"
                 color="accent" type="button"
                 (click)="onCancel()">Cancel
           <!--            *ngIf="editing.mode != false || this.rtr.url === '/'"-->

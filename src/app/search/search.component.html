@@ -6,9 +6,15 @@
   <br>
   <app-search-entry (searchInput)="getResults($event)"></app-search-entry>
   <br>
-  <mat-grid-list *ngIf="results" [cols]="gridColNums" [rowHeight]="gridRowHeight">
-    <mat-grid-tile *ngFor="let result of results">
+  <!--    fxLayout.lt-lg="row wrap"-->
+  <div
+    class="displayResults"
+    fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="15px grid" fxLayoutAlign="start">
+    <div
+      class="gridWrapper"
+      fxFlex="20%" fxFlex.lg="40%" fxFlexOffset="10%"
+      *ngFor="let result of results">
       <app-search-results [sr]="result"></app-search-results>
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </div>
 </div>

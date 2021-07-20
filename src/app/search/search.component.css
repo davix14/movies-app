@@ -1,15 +1,15 @@
-mat-grid-list {
-  /*display: block;*/
-}
-
-mat-grid-tile {
-  width: 20vw;
-  height: 15vh;
-  margin: 3px 0px;
-  display: block;
-  /*margin: 0 5rem;*/
+.displayResults {
+  margin-bottom: 15vh;
 }
 
 .previous-Selection {
   margin-bottom: 30rem;
+}
+
+.gridWrapper {
+  margin-top: 5vh;
+}
+
+.search-container {
+
 }
