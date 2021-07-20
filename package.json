@@ -11,6 +11,9 @@
     "start:server": "nodemon server.js"
   },
   "private": true,
+  "engines": {
+    "node": "16.4.1"
+  },
   "dependencies": {
     "@angular/animations": "~9.1.6",
     "@angular/cdk": "^9.2.4",
