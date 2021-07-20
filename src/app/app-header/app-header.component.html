@@ -16,7 +16,7 @@
         <mat-icon>movie_creation</mat-icon>
         <span>Movies</span>
       </button>
-      <button mat-menu-item *ngIf="this.sessionService.getIsAuthenticated() != false">
+      <button mat-menu-item routerLink="/userSettings" *ngIf="this.sessionService.getIsAuthenticated() != false">
         <mat-icon>settings_applications</mat-icon>
         <span>User Settings</span>
       </button>

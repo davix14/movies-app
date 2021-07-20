@@ -5,6 +5,7 @@ import {SearchComponent} from './search/search.component';
 import {LoginComponent} from './login/login.component';
 import {NewUserComponent} from './new-user/new-user.component';
 import {AuthGuard} from './auth.guard';
+import {UserSettingsComponent} from './user-settings/user-settings/user-settings.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: '', component: AppHomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'register', component: NewUserComponent }
+  { path: 'register', component: NewUserComponent },
+  { path: 'userSettings', component: UserSettingsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
