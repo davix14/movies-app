@@ -35,7 +35,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AuthInterceptor} from './auth-interceptor';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatStepperModule} from '@angular/material/stepper';
-import { UserSettingsComponent } from './user-settings/user-settings/user-settings.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -50,8 +50,7 @@ import { UserSettingsComponent } from './user-settings/user-settings/user-settin
     LoginComponent,
     LoginFormComponent,
     NewUserComponent,
-    RegisterFormComponent,
-    UserSettingsComponent
+    RegisterFormComponent
   ],
     imports: [
         BrowserModule,
@@ -75,7 +74,8 @@ import { UserSettingsComponent } from './user-settings/user-settings/user-settin
         MatProgressSpinnerModule,
         MatSnackBarModule,
         MatChipsModule,
-        MatStepperModule
+        MatStepperModule,
+        FlexLayoutModule
     ],
   entryComponents: [
     CreateMovieComponent

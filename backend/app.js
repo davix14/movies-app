@@ -24,6 +24,8 @@ mongoose
 // Middleware for parsing JSON data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+// Serves files from static directory takes current directory and name of desired directory
 app.use("/", express.static(path.join(__dirname, "movies-app")));
 
 // Added middleware to add headers to response
