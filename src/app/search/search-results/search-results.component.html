@@ -3,7 +3,9 @@
   <mat-card-subtitle>{{ sr.Year }}</mat-card-subtitle>
   <mat-card-header>{{ sr.Type.toUpperCase() }}</mat-card-header>
   <mat-card-content>
-    <img [src]="sr.Poster">
+    <div>
+      <img [src]="sr.Poster">
+    </div>
   </mat-card-content>
   <!--<mat-card-content>
     <mat-label>Thoughts:</mat-label>

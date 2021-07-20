@@ -35,6 +35,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AuthInterceptor} from './auth-interceptor';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatStepperModule} from '@angular/material/stepper';
+import { UserSettingsComponent } from './user-settings/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     LoginComponent,
     LoginFormComponent,
     NewUserComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    UserSettingsComponent
   ],
     imports: [
         BrowserModule,

@@ -11,10 +11,11 @@
   <h2 *ngIf="editing.mode == false">New Movie Entry</h2>
   <h2 *ngIf="editing.mode == true">Edit Movie Entry</h2>
   <form [formGroup]="myForm" (submit)="onSubmit(myForm)">
-    <mat-horizontal-stepper labelPosition="bottom">
+    <mat-horizontal-stepper #stepper labelPosition="bottom">
       <!--    <mat-card>-->
       <mat-step [optional]="true">
         <ng-template matStepLabel>Search</ng-template>
+        <i style="color: #757575">*click 'next' to skip</i>
         <app-search></app-search>
         <div>
           <button mat-raised-button matStepperNext type="button">Next</button>
@@ -59,13 +60,13 @@
       <mat-step>
         <ng-template matStepLabel>Tags</ng-template>
         <mat-form-field class="example-chip-list">
-          <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip-list #chipList aria-label="Tags selection">
             <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
                       [removable]="removable" (removed)="remove(tag)">
               {{tag}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="New fruit..."
+            <input placeholder="New tags..."
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"

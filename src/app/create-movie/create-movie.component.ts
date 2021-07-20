@@ -8,6 +8,7 @@ import {SessionService} from '../session.service';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {SearchResult} from '../search/searchResult.model';
+import {MatStepper} from "@angular/material/stepper";
 
 export interface Fruit {
   name: string;
@@ -37,6 +38,8 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
   public selectedEntry: SearchResult;
   private savedSearchResult: Subscription;
   private editSub: Subscription;
+
+  @ViewChild('stepper') stepper: MatStepper;
 
   constructor(private fb: FormBuilder,
               public movieService: MoviesService,
@@ -71,6 +74,7 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       .subscribe((sr: SearchResult) => {
         if (sr != null){
           this.selectedEntry = sr;
+          this.nextStep();
           if (this.editing.mode !== true) {
             this.myForm.setValue({
               title: sr.Title, rating: '',
@@ -191,6 +195,10 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
     }
     this.editing.mode = false; //  Set editing mode to false
     this.dialogRef.close();
+  }
+
+  nextStep() {
+    this.stepper.selectedIndex = 1;
   }
 
 }

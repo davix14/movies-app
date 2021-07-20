@@ -7,12 +7,17 @@
 
 div {
   display: block;
+  padding-left: 8vw;
 }
 
 img {
-  display: block;
-  height: 40%;
-  width: 40%;
+  display: inline-block;
+  vertical-align: top;
+  width: 35%;
+  margin-right: 25px;
+  position: relative;
+  min-width: 80px;
+  margin-bottom: 10px;
 }
 
 button {

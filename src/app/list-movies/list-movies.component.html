@@ -1,52 +1,33 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 <mat-accordion *ngIf="movies.length > 0 && this.isLoading === false" [multi]="false">
-  <mat-expansion-panel *ngFor="let movie of movies">
-    <mat-expansion-panel-header>
-      <mat-panel-title> {{ movie.title }} </mat-panel-title>
-      <mat-panel-description *ngIf="movie.savedSearchResult.Type"> {{ movie.savedSearchResult.Type.toUpperCase() }} </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-card>
-      <mat-card-title>{{ movie.title }}</mat-card-title>
-      <mat-card-subtitle *ngIf="movie.savedSearchResult.Type"> {{ movie.savedSearchResult.Type.toUpperCase() }} </mat-card-subtitle>
-      <img mat-card-image [src]="movie.savedSearchResult.Poster">
-      <mat-card-content>
+    <mat-expansion-panel *ngFor="let movie of movies">
+        <mat-expansion-panel-header>
+            {{ movie.title }}
+        </mat-expansion-panel-header>
         <mat-list>
-          <mat-list-item>
-            <mat-icon>star</mat-icon>
-            <span>Rating:  {{ movie.rating }}</span>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon>rate_review</mat-icon>
-            <span>Description:  {{ movie.description }}</span>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon>history</mat-icon>
-            <span>Last Updated: {{ formatDate(movie.dateEntered) }}</span>
-          </mat-list-item>
+            <div>
+                <img class="poster" [src]="movie.savedSearchResult.Poster">
+            </div>
+            <mat-list-item>
+                <mat-icon>star</mat-icon>
+                <span>Rating:  {{ movie.rating }}</span>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon>rate_review</mat-icon>
+                <span>Description:  {{ movie.description }}</span>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon>history</mat-icon>
+                <span>Last Updated: {{ formatDate(movie.dateEntered) }}</span>
+            </mat-list-item>
         </mat-list>
-      </mat-card-content>
-    </mat-card>
-    <!--<mat-list>
-      <mat-list-item>
-        <mat-icon>star</mat-icon>
-        <span>Rating:  {{ movie.rating }}</span>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon>rate_review</mat-icon>
-        <span>Description:  {{ movie.description }}</span>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon>history</mat-icon>
-        <span>Last Updated: {{ formatDate(movie.dateEntered) }}</span>
-      </mat-list-item>
-    </mat-list>-->
-    <!--    {{ movie | json }}-->
-    <mat-action-row>
-      <mat-chip-list>
-        <mat-chip *ngFor="let tag of movie.tags">{{tag}}</mat-chip>
-      </mat-chip-list>
-      <button mat-button color="primary" (click)="onEditMovie(movie.id)">EDIT</button>
-      <button mat-button color="warn" (click)="onDeleteMovie(movie.id)">DELETE</button>
-    </mat-action-row>
-  </mat-expansion-panel>
+        <!--    {{ movie | json }} -->
+        <mat-action-row>
+            <mat-chip-list>
+                <mat-chip *ngFor="let tag of movie.tags">{{tag}}</mat-chip>
+            </mat-chip-list>
+            <button mat-button color="primary" (click)="onEditMovie(movie.id)">EDIT</button>
+            <button mat-button color="warn" (click)="onDeleteMovie(movie.id)">DELETE</button>
+        </mat-action-row>
+    </mat-expansion-panel>
 </mat-accordion>
