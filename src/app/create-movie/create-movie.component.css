@@ -11,3 +11,7 @@ mat-slider {
 .cancelBttn {
   margin: 0 1rem;
 }
+
+.hint {
+  color: grey;
+}
