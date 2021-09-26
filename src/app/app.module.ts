@@ -12,14 +12,10 @@ import {AppHomeComponent} from './app-home/app-home.component';
 import {SearchComponent} from './search/search.component';
 import {SearchResultsComponent} from './search/search-results/search-results.component';
 import {SearchEntryComponent} from './search/search-entry/search-entry.component';
-import {LoginComponent} from './login/login.component';
-import {LoginFormComponent} from './login/login-form/login-form.component';
-import {NewUserComponent} from './new-user/new-user.component';
-import {RegisterFormComponent} from './new-user/register-form/register-form.component';
 import {AuthInterceptor} from './auth-interceptor';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {UserSettingsComponent} from './user-settings/user-settings/user-settings.component';
 import {AngularMaterialModule} from './angular-material.module';
+import {AuthModule} from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -31,12 +27,7 @@ import {AngularMaterialModule} from './angular-material.module';
     SearchComponent,
     SearchResultsComponent,
     SearchEntryComponent,
-    LoginComponent,
-    LoginFormComponent,
-    NewUserComponent,
-    RegisterFormComponent,
-    UserSettingsComponent,
-
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +35,8 @@ import {AngularMaterialModule} from './angular-material.module';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlexLayoutModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    AuthModule
   ],
   entryComponents: [
     CreateMovieComponent

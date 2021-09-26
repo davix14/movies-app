@@ -79,7 +79,7 @@ export class RegisterFormComponent implements OnInit {
             this.router.navigate(['']);
           }
         }, (error) => {
-          // console.log(error);
+          console.log(error);
           // console.log(error.error.message);
           const snackBarRef = this.snackBar
             .open(
@@ -103,7 +103,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
 }
