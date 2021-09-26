@@ -8,7 +8,7 @@ import {SessionService} from '../session.service';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {SearchResult} from '../search/searchResult.model';
-import {MatStepper} from "@angular/material/stepper";
+import {MatStepper} from '@angular/material/stepper';
 
 export interface Fruit {
   name: string;

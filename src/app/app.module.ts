@@ -13,9 +13,9 @@ import {SearchComponent} from './search/search.component';
 import {SearchResultsComponent} from './search/search-results/search-results.component';
 import {SearchEntryComponent} from './search/search-entry/search-entry.component';
 import {AuthInterceptor} from './auth-interceptor';
-import {UserSettingsComponent} from './user-settings/user-settings/user-settings.component';
 import {AngularMaterialModule} from './angular-material.module';
 import {AuthModule} from './auth/auth.module';
+import {UserSettingsModule} from './user-settings/user-settings/user-settings.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import {AuthModule} from './auth/auth.module';
     SearchComponent,
     SearchResultsComponent,
     SearchEntryComponent,
-    UserSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +35,8 @@ import {AuthModule} from './auth/auth.module';
     ReactiveFormsModule,
     HttpClientModule,
     AngularMaterialModule,
-    AuthModule
+    AuthModule,
+    UserSettingsModule
   ],
   entryComponents: [
     CreateMovieComponent
