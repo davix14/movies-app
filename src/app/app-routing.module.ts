@@ -1,17 +1,35 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {AppHomeComponent} from './app-home/app-home.component';
-import {SearchComponent} from './search/search.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {AuthGuard} from './auth.guard';
-import {UserSettingsComponent} from './user-settings/user-settings/user-settings.component';
-
 
 const routes: Routes = [
-  { path: 'home', component: AppHomeComponent, canActivate: [AuthGuard] },
-  { path: '', component: AppHomeComponent, canActivate: [AuthGuard] },
-  { path: 'search', component: SearchComponent },
-  { path: 'usr', loadChildren: () => import('./user-settings/user-settings-routing/user-settings-routing.module').then(m => m.UserSettingsRoutingModule), canActivate: [AuthGuard] },
-  { path: 'auth', loadChildren: () => import('./auth/auth-routing/auth-routing.module').then(m => m.AuthRoutingModule)}
+  {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./app-home/app-home.module')
+      .then(m => m.AppHomeModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('./search/search-routing.module')
+      .then(m => m.SearchRoutingModule),
+  },
+  {
+    path: 'usr',
+    loadChildren: () => import('./user-settings/user-settings-routing/user-settings-routing.module')
+      .then(m => m.UserSettingsRoutingModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth-routing/auth-routing.module')
+      .then(m => m.AuthRoutingModule)
+  }
 ];
 
 @NgModule({
@@ -19,4 +37,5 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

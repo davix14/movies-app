@@ -11,7 +11,7 @@
   <h2 *ngIf="editing.mode == false">New Movie Entry</h2>
   <h2 *ngIf="editing.mode == true">Edit Movie Entry</h2>
   <form [formGroup]="myForm" (submit)="onSubmit(myForm)">
-    <mat-horizontal-stepper labelPosition="bottom">
+    <mat-horizontal-stepper labelPosition="bottom" #stepper>
       <!--    <mat-card>-->
       <mat-step [optional]="true">
         <ng-template matStepLabel>Search</ng-template>
@@ -73,9 +73,9 @@
                    (matChipInputTokenEnd)="add($event)">
           </mat-chip-list>
         </mat-form-field>
-        <button class="stepperButtns" mat-raised-button class="submitBttn"
+        <button class="stepperButtns" mat-raised-button
                 color="primary" type="submit">Submit</button>
-        <button class="stepperButtns" mat-raised-button class="cancelBttn"
+        <button class="stepperButtns" mat-raised-button
                 color="accent" type="button"
                 (click)="onCancel()">Cancel
           <!--            *ngIf="editing.mode != false || this.rtr.url === '/'"-->

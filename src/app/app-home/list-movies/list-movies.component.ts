@@ -1,8 +1,7 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {Movie} from '../movies.model';
+import {Movie} from '../../movies.model';
 import {Subscription} from 'rxjs';
-import {MoviesService} from '../movies.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {MoviesService} from '../../movies.service';
 
 @Component({
   selector: 'app-list-movies',
@@ -15,7 +14,7 @@ export class ListMoviesComponent implements OnInit, OnDestroy {
   private movieSub: Subscription;
   isLoading: boolean; //  Indicator used to display spinner
 
-  constructor(public moviesService: MoviesService, private router: Router) {
+  constructor(public moviesService: MoviesService) {
   }
 
   ngOnInit(): void { //  On Initialization:

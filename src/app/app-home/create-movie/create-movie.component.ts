@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
-import {Movie} from '../movies.model';
-import {MoviesService} from '../movies.service';
+import {Movie} from '../../movies.model';
+import {MoviesService} from '../../movies.service';
 import {Subscription} from 'rxjs';
 import {MatDialogRef} from '@angular/material/dialog';
-import {SessionService} from '../session.service';
+import {SessionService} from '../../session.service';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {SearchResult} from '../search/searchResult.model';
+import {SearchResult} from '../../search/searchResult.model';
 import {MatStepper} from '@angular/material/stepper';
 
 export interface Fruit {
@@ -198,7 +198,8 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
   }
 
   nextStep() {
-    this.stepper.selectedIndex = 1;
+    // this.stepper.selectedIndex = 1;
+    this.stepper.next();
   }
 
 }
