@@ -6,7 +6,7 @@ import {NewUserComponent} from '../new-user/new-user.component';
 import {RegisterFormComponent} from '../new-user/register-form/register-form.component';
 import {AngularMaterialModule} from '../angular-material.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import {AuthRoutingModule} from './auth-routing/auth-routing.module';
 
 
 
@@ -21,7 +21,7 @@ import {RouterModule} from '@angular/router';
     CommonModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    RouterModule
+    AuthRoutingModule
   ]
 })
 export class AuthModule { }
