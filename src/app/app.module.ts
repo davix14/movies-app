@@ -8,6 +8,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth-interceptor';
 import {AngularMaterialModule} from './angular-material.module';
+import {AppHomeModule} from './app-home/app-home.module';
+import {AuthModule} from './auth/auth.module';
+import {SearchModule} from './search/search.module';
+import {UserSettingsModule} from './user-settings/user-settings/user-settings.module';
 
 @NgModule({
   declarations: [
@@ -21,10 +25,10 @@ import {AngularMaterialModule} from './angular-material.module';
     ReactiveFormsModule,
     HttpClientModule,
     AngularMaterialModule,
-    // AuthModule,
-    // UserSettingsModule,
-    // SearchModule,
-    // AppHomeModule
+    AuthModule,
+    UserSettingsModule,
+    SearchModule,
+    AppHomeModule
   ],
   entryComponents: [
     // CreateMovieComponent
