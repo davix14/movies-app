@@ -5,8 +5,8 @@ import {MoviesService} from '../../movies.service';
 
 @Component({
   selector: 'app-list-movies',
-  templateUrl: './list-movies.component.html',
-  styleUrls: ['./list-movies.component.css']
+  templateUrl: 'list-movies.component.html',
+  styleUrls: ['list-movies.component.css']
 })
 export class ListMoviesComponent implements OnInit, OnDestroy {
   movies: Movie[] = []; //  Holds movies received from movies service

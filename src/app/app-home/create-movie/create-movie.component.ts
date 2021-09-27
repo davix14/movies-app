@@ -16,8 +16,8 @@ export interface Fruit {
 
 @Component({
   selector: 'app-create-movie',
-  templateUrl: './create-movie.component.html',
-  styleUrls: ['./create-movie.component.css']
+  templateUrl: 'create-movie.component.html',
+  styleUrls: ['create-movie.component.css']
 })
 export class CreateMovieComponent implements OnInit, OnDestroy {
   myForm: FormGroup; // new Form obj to take output of formBuilder
