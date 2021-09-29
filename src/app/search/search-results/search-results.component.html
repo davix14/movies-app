@@ -1,5 +1,5 @@
-<mat-card fxFill>
-  <mat-card-title>{{ sr.Title }}</mat-card-title>
+<mat-card fxFill (click)="movieSelected(sr)">
+  <mat-card-title> {{ sr.Title }} </mat-card-title>
   <mat-card-subtitle>{{ sr.Year }}</mat-card-subtitle>
   <mat-card-header>{{ sr.Type.toUpperCase() }}</mat-card-header>
   <mat-card-content>
