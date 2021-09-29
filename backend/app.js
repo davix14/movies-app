@@ -6,8 +6,12 @@ const path = require("path");
 const moviesRoutes = require('./routes/movies');
 const usersRoutes = require('./routes/users');
 
+const compression = require('compression');
 
 const app = express();
+
+// compress responses
+app.use(compression());
 
 mongoose
   .connect(// PW: 0yigUYH5y2mTAmkc
@@ -37,6 +41,9 @@ app.use((req, res, next) => {
   );
   res.setHeader("Access-Control-Allow-Methods",
     "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+  );
+  res.setHeader("Accept-Encoding",
+    "gzip, compress, br"
   );
   /*if(req.method === "OPTIONS") {
     // res.setHeader('http', 'ok');
