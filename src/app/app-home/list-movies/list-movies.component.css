@@ -10,12 +10,16 @@ mat-list {
     display: block;
 }
 
+.img-container {
+  width: 80%;
+  margin: 0 20% 0;
+}
+
 .poster {
     display: inline-block;
-    vertical-align: top;
-    width: 25%;
-    margin-right: 25px;
+    width: 20vw;
     position: relative;
-    min-width: 200px;
+    min-width: 150px;
     margin-bottom: 20px;
+    align-self: center;
 }
