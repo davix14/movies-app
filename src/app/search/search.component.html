@@ -9,10 +9,10 @@
   <!--    fxLayout.lt-lg="row wrap"-->
   <div
     class="displayResults"
-    fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="15px grid" fxLayoutAlign="start">
+    fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="15px grid" fxLayoutAlign="center">
     <div
       class="gridWrapper"
-      fxFlex="20%" fxFlex.lg="40%" fxFlexOffset="10%"
+      fxFlex="15%" fxFlex.lg="40%" fxFlexOffset="10%" fxFlexAlign="center"
       *ngFor="let result of results">
       <app-search-results [sr]="result"></app-search-results>
     </div>

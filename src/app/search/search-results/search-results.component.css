@@ -1,9 +1,8 @@
-/*mat-card {
-  height: 100%;
-  width: 100%;
+mat-card {
+  width: 5vw;
   display:flex;
   flex-direction: column;
-}*/
+}
 
 div {
   display: block;

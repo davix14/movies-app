@@ -1,5 +1,7 @@
 .displayResults {
   margin-bottom: 15vh;
+  width: 80%;
+
 }
 
 .previous-Selection {
@@ -8,6 +10,7 @@
 
 .gridWrapper {
   margin-top: 5vh;
+  justify-content: space-around;
 }
 
 .search-container {
