@@ -19,14 +19,14 @@ export class SearchEntryComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private searchResults: SearchMoviesService) {
+    private searchService: SearchMoviesService) {
   }
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
       search: ['', [Validators.required, Validators.minLength(2)]]
     });
-    this.searchResults.getSearchResults() //  Call the subscription Will update everytime service is updated
+    this.searchService.getSearchResults() //  Call the subscription Will update everytime service is updated
       .subscribe((results) => { //  Success function
         this.results = results.Search; // taking results and passing them to local var
         this.searchInput.emit(this.results); //  emit event when new results are received
@@ -35,9 +35,12 @@ export class SearchEntryComponent implements OnInit, OnDestroy {
     this.searchSub = this.searchForm.controls.search.valueChanges
       .pipe(debounceTime(300))
       .subscribe((value) => {
+        this.searchService.resetPageNumber();
+        this.searchService.resetLastSearch();
+        // this.ngOnInit();
         if (this.searchForm.valid) {
           // console.log(value);  - For DEBUGGING
-          this.searchResults.searchForMany(value);
+          this.searchService.searchForMany(value);
         }
       });
     /*const source = fromEvent<any>(this.el.nativeElement, 'keyup')  EXAMPLE of FROM EVENT
@@ -49,12 +52,6 @@ export class SearchEntryComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.searchSub.unsubscribe();
-  }
-
-  search(input: string) {
-    if (this.searchForm.valid) {
-      this.searchResults.searchForMany(input);
-    }
   }
 
 }

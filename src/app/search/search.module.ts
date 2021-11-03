@@ -6,12 +6,14 @@ import {AngularMaterialModule} from '../angular-material.module';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
+import { SearchNavComponent } from './search-nav/search-nav.component';
 
 @NgModule({
   declarations: [
     SearchComponent,
     SearchResultsComponent,
-    SearchEntryComponent
+    SearchEntryComponent,
+    SearchNavComponent
   ],
   imports: [
     CommonModule,

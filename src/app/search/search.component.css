@@ -16,3 +16,9 @@
 .search-container {
 
 }
+
+.pageButtons {
+  display: inline;
+  margin-top: 25%;
+  min-height: 10%;
+}

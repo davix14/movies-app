@@ -1,0 +1,9 @@
+<p>Page: {{ this.pageNumber | number }}</p>
+<button (click)="previousPage()"
+        *ngIf="this.pageNumber > 1"
+        class="prevBtn"
+        mat-button
+        color="warn">Previous Page</button>
+<button (click)="nextPage()"
+        class="nextBtn"
+        mat-button color="primary">Next Page</button>

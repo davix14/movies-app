@@ -1,26 +1,30 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchResult} from './searchResult.model';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Subscription} from 'rxjs';
 import {Movie} from '../movies.model';
 import {MoviesService} from '../movies.service';
+import {SearchMoviesService} from "./search-movies.service";
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
-  results: SearchResult[]; //  holds array of search results
+export class SearchComponent implements OnInit, OnDestroy {
+  results: SearchResult[] = null; //  holds array of search results
   gridRowHeight = '45vh'; //  Used to control the row height
   gridColNums = 1; //  Used to control the column #s in the grid
   private editing: Subscription;
+
   edit = {
     mode: null,
     movie: null
   };
 
-  constructor(public breakPointObserver: BreakpointObserver, private movieService: MoviesService) { //  Injecting the breakpoint observer
+  constructor(public breakPointObserver: BreakpointObserver,
+              private movieService: MoviesService,
+              private searchMovieService: SearchMoviesService) { //  Injecting the breakpoint observer
   }
 
   ngOnInit() {
@@ -37,6 +41,8 @@ export class SearchComponent implements OnInit {
           this.gridColNums = 1;
         }
       });*/
+    this.searchMovieService.resetPageNumber();
+    this.searchMovieService.resetLastSearch();
     this.editing = this.movieService.getEditMovieUpdateListener()
       .subscribe((movie: Movie[]) => {
         // console.log(movie[0]);
@@ -53,6 +59,12 @@ export class SearchComponent implements OnInit {
   getResults(results: SearchResult[]) {
     this.results = results;
     // console.log(this.results);  For Debugging
+  }
+
+  ngOnDestroy() {
+    this.editing.unsubscribe();
+    this.searchMovieService.resetPageNumber();
+    this.searchMovieService.resetLastSearch();
   }
 
 }

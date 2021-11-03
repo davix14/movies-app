@@ -9,6 +9,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {SearchResult} from '../../search/searchResult.model';
 import {MatStepper} from '@angular/material/stepper';
+import {SearchMoviesService} from "../../search/search-movies.service";
 
 export interface Fruit {
   name: string;
@@ -44,7 +45,8 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               public movieService: MoviesService,
               public sessionService: SessionService,
-              private dialogRef: MatDialogRef<CreateMovieComponent>
+              private dialogRef: MatDialogRef<CreateMovieComponent>,
+              private searchMovieservice: SearchMoviesService
   ) {
   } // Injecting Form Builder (to build forms) and
     // movieService (to be able to edit, add, delete movies)
@@ -168,6 +170,9 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
         this.myForm.controls[key].setErrors(null);*/
       this.dialogRef.close();
       return null; //  Return null to prevent reloading page
+
+      this.searchMovieservice.resetPageNumber();
+      this.searchMovieservice.resetLastSearch();
     } else { //  In editing Mode
       this.movieService.sendEditMovie( //  Send new movie to service
         this.editing.movie.id,
@@ -184,6 +189,10 @@ export class CreateMovieComponent implements OnInit, OnDestroy {
       this.myForm.reset(); //  Reset the form
       this.form.resetForm(); // Reset form errors
       this.dialogRef.close(); //  Close the dialog
+
+      this.searchMovieservice.resetPageNumber();
+      this.searchMovieservice.resetLastSearch();
+
       return null;
     }
   }
