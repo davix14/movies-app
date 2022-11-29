@@ -45,12 +45,6 @@ app.use((req, res, next) => {
   res.setHeader("Accept-Encoding",
     "gzip, compress, br"
   );
-  /*if(req.method === "OPTIONS") {
-    // res.setHeader('http', 'ok');
-    res.status(200).json({
-      message: 'Ok'
-    });*/
-    // return;
 
   next();
 });
