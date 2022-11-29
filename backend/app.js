@@ -16,7 +16,7 @@ app.use(compression());
 mongoose
   .connect(// PW: 0yigUYH5y2mTAmkc
     // mongodb+srv://max:<password>@cluster0.bm0yx.mongodb.net/<dbname>?retryWrites=true&w=majority
-    "mongodb+srv://max:0yigUYH5y2mTAmkc@cluster0.bm0yx.mongodb.net/node-angular?retryWrites=true&w=majority"
+    "mongodb+srv://max:max@cluster0.bm0yx.mongodb.net/node-angular?retryWrites=true&w=majority"
   )
   .then(() => {
     console.log("Connected to database!");
